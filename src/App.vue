@@ -119,10 +119,10 @@
 //     }
 //   }
 
-import {
-    Component,
-    Vue
-} from "vue-property-decorator";
+// import {
+//     Component,
+//     Vue
+// } from "vue-property-decorator";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import login from './views/Login.vue'
 // import registration from './views/Registration.vue'

@@ -8,6 +8,7 @@ const instance = axios.create({
   baseURL: process.env.VUE_APP_SERVER_HOST,
 });
 
+
 instance.defaults.headers.common[
   "Authorization"
 ] = `Bearer ${localStorage.token}`;
@@ -31,16 +32,21 @@ export default new Vuex.Store({
       return data;
     },
 
-    async logout({ state, commit, rootState }) {
-      const { data } = await instance.get("/logout");
-      commit("setToken", "");
-      return data;
-    },
+    // async logout({ state, commit, rootState }) {
+    //   const { data } = await instance.get("/logout");
+    //   commit("setToken", "");
+    //   return data;
+    // },
 
-    async usersList({ state }, params) {
-      const { data } = await instance.get("/user/list");
-      return data;
-    },
+    // async usersList({ state }, params) {
+    //   const { data } = await instance.get("/user/list");
+    //   return data;
+    // },
+
+    // async messageCreate({ state }, params) {
+    //   const { data } = await instance.post("/message/create", params);
+    //   return data;
+    // },    
   },
   modules: {},
 });

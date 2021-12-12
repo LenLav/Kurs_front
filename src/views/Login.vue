@@ -22,6 +22,40 @@
             <button type="submit" class="osnovnButton">Зарегистрироваться</button>
         </form>
 
+
+
+<div v-if="!token">
+      Вход в систему
+      <input
+        placeholder="Email"
+        class="form-control"
+        v-model="form.email"
+      /><br />
+      <input
+        placeholder="Пароль"
+        class="form-control"
+        v-model="form.password"
+      />
+      <button class="btn btn-primary form-control" @click="login()">
+        Вход
+      </button>
+    </div>
+
+    <div v-else class="card">
+      <button class="btn btn-outline-primary form-control" @click="logout()">
+        Выход
+      </button>
+      <div class="card-header">accessToken</div>
+      <div class="card-body font-xs">
+        {{ token }}
+      </div>
+      <button class="btn btn-sm btn-success form-control" @click="userList()">
+        Обновить список пользователей
+      </button>
+      
+    </div>
+
+
     </div>
     </div>
 </body>
@@ -50,25 +84,39 @@ export default class Home extends Vue {
 
 
     form = {
-        email : "",
-        password: ""
+        email : "leader@mail.ru",
+        password: "123456"
     }
 
     response = "ожидание"
-    ffio = "qwe"
-    poi = "0"
+    // ffio = "qwe"
+    // poi = "0"
+    token = "";
+
+    async login() {
+        alert("клик")
+    const result = await this.$store.dispatch("login", this.form);
+    // console.log(result)
+    // this.token = result.token;
+  }
 
     async vhod() {
-        const result = await axios.post('http://localhost:4200/entry', this.form)
+
+// const result = await this.$store.dispatch("login", this.form);
+//     this.token = result.token;
+
+        const result = await axios.post('http://localhost:4200/login', this.form)
         this.response = result.data
-        // console.log(this.response)
+
+        // this.response = "результат"
+        console.log(this.response)
         // console.log(result.data)
         // this.ffio = result.data.success
         // this.poi = result.data.data.job
         // console.log(this.poi)
-        // alert(this.response)
+        // alert("клик")
         
-        window.location.href = 'profil'
+        // window.location.href = 'profil'
 
         // if (result.data.success === true) {
         //     window.location.href = 'profil'
@@ -76,9 +124,9 @@ export default class Home extends Vue {
         // else{
 
         // }
-        this.$emit('vhod',{
-            fio: this.ffio
-        })
+        // this.$emit('vhod',{
+        //     fio: this.ffio
+        // })
         
     }
 

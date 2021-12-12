@@ -1,0 +1,285 @@
+$DarckBlue: #2a5885;
+$margin: 16px;
+
+body {
+    height: 1px;
+    background: linear-gradient(45deg, #f5f7fa, #c7d2e4);
+    font-family: Tahoma;
+    color: $DarckBlue;
+}
+
+h5{
+    color: #203649;
+}
+
+
+//.......расположение основных контейнеров и отступы сверху......//
+.home,
+.database,
+.messages,
+.news {
+    // border: 1px solid orange;
+    margin-top: 40px;
+    width: 83%;
+    margin-right: auto;
+    margin-left: 17%;
+}
+
+.login,
+.EditProfil,
+.profil,
+.registration {    
+    // border: 1px solid orange;
+    width: 83%;
+    margin-right: auto;
+     margin-left: 17%;
+     margin-top: 60px;
+}
+
+
+//........карусель........//
+.carousel-caption {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    z-index: 20;
+    color: rgb(255, 255, 255);
+    width: 75%;
+    height: 100%;
+}
+
+.carousel-caption div {
+    text-align: center;
+}
+
+.trickcenter {
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+//.........разделяющая линия..........//
+.hrSt {
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    width: 55%;
+    color: #4b5a75;
+}
+
+.Profil_info_Hr {
+    margin-top: -20px;
+    margin-left: 40px;
+    width: 80%;
+    color: #4b5a75;
+}
+
+
+//..............профиль и редактирование профиля............//
+.formaPolzovatelya {
+    background-color: #fff;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    // margin-top: 15px;
+    box-shadow: 0 5px 10px #55677d;
+    // border-radius: 5px;
+    resize: none;
+}
+
+.Profil_info_blok {
+    color: black;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 40px;
+}
+
+.card {
+    background-color: #ffffff;
+    width: 55%;
+
+    margin: 100px auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3%;
+
+    box-shadow: 0 5px 10px #55677d;
+    color: #55677d;
+    border-radius: 2px;
+}
+
+.card-photo { //фото
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    border: 1px solid #818c99;
+}
+
+.containerInfo { //контейнер с информацией
+    display: flex;
+    justify-content: flex-start;
+}
+
+.razmer {// ширина блоков контейнера
+    width: 45%;
+}
+
+.infoLev{ //в профиле информация слева
+    color: #818c99;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 40px;    
+}
+
+.infoPrav{  //в профиле информация справа
+    color: $DarckBlue;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 40px;    
+}
+
+
+//...............Редактирование профиля..................//
+.Input_edit_profil{
+    color: $DarckBlue;
+    border: none;
+    font-size: 14px;
+}
+
+.Input_fio_edit_profil{
+    width: 90%;
+    border: none;
+    text-align: center;
+    color: #203649;
+}
+
+.Input_edit_profil:focus,
+.Input_fio_edit_profil:focus {
+    border: 1px solid #acb1b8;    
+    outline: none !important;
+}
+
+
+
+
+.TableCheck{
+    width: 100% ;
+    text-align: left;
+    font-size: 14px;
+    font-family:  Tahoma;
+  }
+  
+  .TdLev{
+    width: 50%;
+    padding-top: 10px;
+    padding-left: 40px;
+    color: #818c99;
+    // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .TdPrav{
+    width: 45%;
+    padding-top: 10px;
+    padding-right: 30px;
+    color: $DarckBlue;
+    // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+
+
+
+//.................ссылка на редактирование профиля................//
+.edit{
+    text-decoration-line: none;
+    color: #818c99;
+    font-size: 13px;
+
+    &:hover {text-decoration-line: underline;}
+}
+
+
+.editDiv{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10%;
+}
+
+
+//..............вход и регистрация............//
+.registr {
+    background-color: #ffffff;
+    width: 55%;
+    margin: 100px auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3%;
+    box-shadow: 0 5px 10px #55677d;
+    color: #55677d;
+    // border-radius: 2px;
+}
+
+.podskazka { //еще не зарегистрированы?
+    color: $DarckBlue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+}
+
+.inpStyle {
+    width: 80%;
+}
+
+
+//.........база данных/таблица........//
+.tableContainer{ //ширина
+    width: 100%;
+    // padding-left: 2%;
+    //padding-right: 2%;
+}
+
+.tableSize{ //размер шрифта
+    font-size: 13px;
+}
+
+
+//.......кнопки........//
+.osnovnButton {
+    background-color: #e5ebf1;
+    border: none;
+    border-radius: 3px;
+    width: 170px;
+    height: 35px;
+    color: #55677d;
+    font-size: 15px;
+    //  margin-top: 10px;
+    // text-align: center;
+    // padding-left: 10%; 
+
+    &:hover{background-color: #c2ced8;}
+}
+
+
+//................заголовок регистрации.................//
+.backIcon{
+    margin-left: 50%;
+    color: #55677d;
+}
+
+table.text  {
+    width:  100%;
+    border-spacing: 0; 
+   }
+   table.text td {
+    vertical-align: top; 
+   }
+   td.rightcol { /* Правая ячейка */ 
+   width: 80%;
+    text-align: left;
+    padding-left: 15%;  
+   }
+   td.leftcol {
+       width: 20%;
+       text-align: left;
+       color: #55677d;
+   }

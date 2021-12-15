@@ -29,6 +29,10 @@
             <td class="TdPrav">{{JOB}}</td>
           </tr>
           <tr>
+            <td class="TdLev">Паспортные данные:</td>
+            <td class="TdPrav">{{PASPORT}}</td>
+          </tr>
+          <tr>
             <td class="TdLev">Дата рождения:</td>
             <td class="TdPrav">{{BIRTHDAY}}</td>
           </tr>
@@ -73,8 +77,8 @@
                 <a class="edit" href="/profil_edit">Редактировать <i class="bi bi-pencil-fill" style="font-size: 1rem;"></i></a>
             </div>
             
-            <p ><button type="button" class="osnovnButton" @click="delete_profil()" >Удалить профиль</button></p>
-            <p ><button type="button" class="osnovnButton" @click="logout()" >Выйти</button></p>
+            <p ><button type="button" class="osnovnButton" @click="delete_profil()" >Удалить профиль <i class="bi bi-trash-fill"></i></button></p>
+            <p ><button type="button" class="osnovnButton" @click="logout()" >Выйти <i class="bi bi-box-arrow-right"></i></button></p>
             
 
         </div>
@@ -114,6 +118,7 @@ SALARY = ""
 DATE_OF_RECEIPT = ""
 AMOUNT_OF_CHILDREN = ""
 MARITAL_STATUS = ""
+PASPORT = ""
 
 OK_TRUE = "false"
 info_push = ""
@@ -133,13 +138,22 @@ async mounted() {
     this.DATE_OF_RECEIPT = result.date_of_receipt
     this.AMOUNT_OF_CHILDREN = result.amount_of_children
     this.SALARY = result.salary
-    this.MARITAL_STATUS = result.marital_status    
+    this.MARITAL_STATUS = result.marital_status 
+    this.PASPORT = result.pasport   
   }
 
   async logout() {
     const result = await this.$store.dispatch("logout");
     this.token = "";
-    console.log(result.message)
+    window.location.href = 'login'
+    
+  }
+
+  async delete_profil() {
+    const result = await this.$store.dispatch("logout");
+    this.token = "";
+    window.location.href = 'login'
+    
   }
 
 

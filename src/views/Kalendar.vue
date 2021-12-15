@@ -1,13 +1,12 @@
 <template>
   <b-row>
     <b-col md="auto">
-      <b-calendar v-model="value" @context="onContext" locale="ru"></b-calendar>
-
+      <b-calendar v-model="value" @context="onContext" locale="en-US"></b-calendar>
     </b-col>
     <b-col>
-      <p>Значение: <b>'{{ value }}'</b></p>
-      <p class="mb-0">Контекст:</p>
-      <pre class="small"></pre>
+      <p>Value: <b>'{{ value }}'</b></p>
+      <p class="mb-0">Context:</p>
+      <pre class="small">{{ context }}</pre>
     </b-col>
   </b-row>
 </template>

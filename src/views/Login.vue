@@ -36,7 +36,6 @@
 
         <p class="podskazka">Ещё не зарегистрированы?</p>
         <hr class="hrSt">
-        {{response}}
         <form action="registration" style="padding-bottom: 20px;">
             <button type="submit" class="osnovnButton">Зарегистрироваться</button>
         </form>
@@ -114,6 +113,7 @@ info_push: "Успешная регистрация!!!",
     OK_TRUE = "false"
     OK_FALSE = "false"
     info_push = ""
+    
 
 //     async login() {
 //         alert("клик")
@@ -123,9 +123,23 @@ info_push: "Успешная регистрация!!!",
 //   }
 
     async vhod() {
-
         const result = await this.$store.dispatch("login", this.form);
         this.token = result.token;
+        // console.log(result.message)
+        // console.log(result)
+
+        if (this.token === "") {
+            console.log("ytr")
+        }
+
+        
+        console.log(this.token)
+       
+    //    if (result.message === "Ошибка при валидации данных.") {
+    //         this.OK_FALSE = "true"
+    //         this.info_push = result.message
+    //     }
+
        if (result.success === true) {
             this.OK_TRUE = "true"
             this.info_push = result.message
@@ -138,57 +152,7 @@ info_push: "Успешная регистрация!!!",
         }
     console.log(result)
     console.log(result.success)
-
-
-// const result = await this.$store.dispatch("login", this.form);
-//     this.token = result.token;
-
-        // const result = await axios.post('http://localhost:4200/login', this.form)
-        // this.response = result.data
-
-        // this.response = "результат"
-        // console.log(this.response)
-        // console.log(result.data)
-        // this.ffio = result.data.success
-        // this.poi = result.data.data.job
-        // console.log(this.poi)
-        // alert("клик")
-        
-        // window.location.href = 'profil'
-
-        // if (result.data.success === true) {
-        //     window.location.href = 'profil'
-        // }
-        // else{
-
-        // }
-        // this.$emit('vhod',{
-        //     fio: this.ffio
-        // })
-        
     }
-
-
-
-
-
-    // async vhod() {
-    //     alert("вход")
-         
-    //     // document.getElementById("LKab").className = "nav-link";
-    //     window.location.href = 'profil'
-    //     // document.location.href = "http://localhost:8080/profil";
-        
-    // }
-
-    // async vhod2() {
-    //     alert("вход2")
-         
-    //     // document.getElementById("LKab").className = "nav-link";
-    //     window.location.href = 'profil2'
-    //     // document.location.href = "http://localhost:8080/profil";
-        
-    // }
 }
 </script>
 

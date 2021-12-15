@@ -79,12 +79,12 @@ h5{
 //..............профиль и редактирование профиля............//
 .formaPolzovatelya {
     background-color: #fff;
-    width: 40%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     // margin-top: 15px;
     box-shadow: 0 5px 10px #55677d;
-    // border-radius: 5px;
+     border-radius: 4px;
     resize: none;
 }
 
@@ -217,7 +217,7 @@ h5{
     margin-top: 3%;
     box-shadow: 0 5px 10px #55677d;
     color: #55677d;
-    // border-radius: 2px;
+    border-radius: 4px;
 }
 
 .podskazka { //еще не зарегистрированы?
@@ -334,3 +334,16 @@ table.text  {
             align-items: center;
             height: 50px;
                 }
+
+                .push_content_news{
+                    padding: 16px;
+                    // background-color: linear-gradient(45deg, #b1b7c0, #8695ad);
+                    // background-color: salmon;
+                    background: linear-gradient(45deg, #4f5c70, #2758a7);
+                    border-radius: 5px;
+                    color: white;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 50px;
+                        }

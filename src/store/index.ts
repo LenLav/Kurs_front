@@ -41,7 +41,8 @@ export default new Vuex.Store({
 
     async me_inform({ state, commit, rootState }) {
       const { data } = await instance.get("/users/me_inform");
-      commit("setToken", "");
+      // const token = data.success ? data.token : "";
+      // commit("setToken", "");
       return data;
     },
 
@@ -51,10 +52,16 @@ export default new Vuex.Store({
       return data;
     },
 
-    // async usersList({ state }, params) {
-    //   const { data } = await instance.get("/user/list");
+    // async delete_profil({ state, commit, rootState }) {
+    //   const { data } = await instance.get("/users/logout");
+    //   commit("setToken", "");
     //   return data;
     // },
+
+    async usersList({ state }, params) {
+      const { data } = await instance.get("/users");
+      return data;
+    },
 
     // async messageCreate({ state }, params) {
     //   const { data } = await instance.post("/message/create", params);

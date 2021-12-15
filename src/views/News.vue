@@ -1,12 +1,23 @@
 <template>
 <body>
+
+<div v-show="OK_TRUE" class="push" >
+        <div class="push_content">
+        
+        <div class="push_content_news">
+          <i class="bi bi-plus-circle" style="padding-right: 10px;"></i>
+            <span>Добавить новость</span>     
+        </div>
+        </div>
+    </div>
+
   <div class="news" >
     <div>
       <p>Новость 1</p>
     <hr class="hrSt">
     </div>
     
-    <div v-show="isElVisible" id="ap">
+    <div>
       <p>Новость 2</p>
     <hr class="hrSt">
     </div>
@@ -15,58 +26,49 @@
       <p>Новость 3</p>
     </div>
 
-    <!-- <p><button type="button" class="btn btn-outline-success" @click="click()">Click</button> <br></p> -->
-        <!-- <p><button type="button" class="btn btn-outline-success" v-on:click="visible=!visible">Click2</button> <br></p> -->
-
-
-
- 
-    
   </div>
 </body>  
 </template>
 
-<style lang="scss">
-
-</style>
 
 
 
-// <script lang="ts">
-// import { Component, Vue } from "vue-property-decorator";
-// import "bootstrap/dist/css/bootstrap.min.css";
 
-// @Component({
-//   components: {
-//   },
-// })
-// export default class Home extends Vue {
-  
-// }
-// </script>
+<script lang="ts">
+import {
+    Component,
+    Vue
+} from "vue-property-decorator";
+import "bootstrap/dist/css/bootstrap.min.css";
 
+@Component({
+    components: {},
+})
 
-<script>
-export default {
-  name : 'NewS',
-  props : {
-    msg: String
-  },
-  data: () => {
-    return{
-      isElVisible : true
+export default class Home extends Vue {
+
+  data(){
+        return {
+OK_TRUE: false,
+        } 
+        
     }
-  },
-  methods: {
-    click(){
-      // let name = this.$store.dispatch("SET_NAME", "имя")      
-      // console.log(name);
-console.log(this.$store.state.visible1)
-      this.$store.commit('CHANGE_VISIBLE1', false)
-    console.log(this.$store.state.visible1)
-      this.isElVisible = this.$store.state.visible1
-      
-    }
+
+token = "";
+
+
+OK_TRUE = "false"
+
+async mounted() {
+    this.token = localStorage.token;
+
+    const result = await this.$store.dispatch("me_inform");
+    console.log(result.isAdmin)
+
+    if (result.isAdmin === true) {
+            this.OK_TRUE = "true"
+            console.log(this.OK_TRUE)            
+        }
   }
 }
 </script>

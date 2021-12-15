@@ -21,7 +21,7 @@
 
               <!-- <th scope="col">Сообщения</th> -->
               <!-- <th scope="col">Хобби</th> -->
-              <th scope="col">Дата создания</th>
+              <th scope="col">Логин</th>
               <th scope="col">Удалить</th>
             </tr>
           </thead>
@@ -80,13 +80,17 @@ export default class Home extends Vue {
   users_message = [];
 
   async mounted() {
-    await axios({ method: "GET", url: "http://localhost:4200/users" }).then(
-      (result) => {
-        this.users = result.data.data;
-        // console.log(this.users);
-        // console.log(this.users_message);
-      }
-    );
+    const result = await this.$store.dispatch("usersList");
+    this.users = result.data;
+
+
+    // await axios({ method: "GET", url: "http://localhost:4200/users" }).then(
+    //   (result) => {
+    //     this.users = result.data.data;
+    //     // console.log(this.users);
+    //     // console.log(this.users_message);
+    //   }
+    // );
   };  
 }
 </script>

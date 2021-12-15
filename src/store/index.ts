@@ -32,11 +32,24 @@ export default new Vuex.Store({
       return data;
     },
 
-    // async logout({ state, commit, rootState }) {
-    //   const { data } = await instance.get("/logout");
-    //   commit("setToken", "");
-    //   return data;
-    // },
+    async registration({ state, commit, rootState }, params) {
+      const { data } = await instance.post("/registration", params);
+      const token = data.success ? data.token : "";
+      commit("setToken", token);
+      return data;
+    },
+
+    async me_inform({ state, commit, rootState }) {
+      const { data } = await instance.get("/users/me_inform");
+      commit("setToken", "");
+      return data;
+    },
+
+    async logout({ state, commit, rootState }) {
+      const { data } = await instance.get("/users/logout");
+      commit("setToken", "");
+      return data;
+    },
 
     // async usersList({ state }, params) {
     //   const { data } = await instance.get("/user/list");

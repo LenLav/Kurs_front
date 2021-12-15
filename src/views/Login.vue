@@ -1,5 +1,26 @@
 <template>
 <body>
+    
+    <div v-show="OK_TRUE" class="push" >
+        <div class="push_content">
+        
+        <div id="text_push_id" class="push_content_true">
+            <span>{{info_push}}</span>     
+<i class="bi bi-x-circle" style="padding-left: 10px;" @click="OK_TRUE = !OK_TRUE" ></i>
+        </div>
+        </div>
+    </div>
+
+    <div v-show="OK_FALSE" class="push" >
+        <div class="push_content">
+        
+        <div id="text_push_id" class="push_content_false">
+            <span>{{info_push}}</span>
+            <i class="bi bi-x-circle" style="padding-left: 10px;" @click="OK_FALSE = !OK_FALSE" ></i>
+        </div>
+        </div>
+    </div>
+    
     <div class="login" >
     <div class="registr" >
         <h2 style="padding-top: 15px;">Вход</h2>
@@ -8,11 +29,9 @@
 
         <p><input v-model="form.email" style="width:50%" placeholder="Email"> <br></p>
         <p><input v-model="form.password" type="password" style="width:50%" placeholder="Пароль"> <br></p>
-        <!-- <form action="profil" >
-            <button type="submit" class="btn btn-outline-success" >Войти</button>
-        </form> -->
+        
         <p><button type="button" class="osnovnButton" @click="vhod()">Войти</button> <br></p>
-        <!-- <p><button type="button" class="btn btn-outline-success" @click="vhod2()">Войти2</button> <br></p> -->
+        
         <hr class="hrSt">
 
         <p class="podskazka">Ещё не зарегистрированы?</p>
@@ -24,7 +43,7 @@
 
 
 
-<div v-if="!token">
+<!-- <div v-if="!token">
       Вход в систему
       <input
         placeholder="Email"
@@ -53,7 +72,7 @@
         Обновить список пользователей
       </button>
       
-    </div>
+    </div> -->
 
 
     </div>
@@ -68,18 +87,19 @@ import {
 } from "vue-property-decorator";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-// import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 
 @Component({
     components: {
-        // HelloWorld,
     },
 })
 export default class Home extends Vue {
-    data (){
-        return{
-            fio: ''
-        }
+     data(){
+        return {
+OK_TRUE: false,
+OK_FALSE: false,
+info_push: "Успешная регистрация!!!",
+        } 
+        
     }
 
 
@@ -89,27 +109,45 @@ export default class Home extends Vue {
     }
 
     response = "ожидание"
-    // ffio = "qwe"
-    // poi = "0"
     token = "";
 
-    async login() {
-        alert("клик")
-    const result = await this.$store.dispatch("login", this.form);
-    // console.log(result)
-    // this.token = result.token;
-  }
+    OK_TRUE = "false"
+    OK_FALSE = "false"
+    info_push = ""
+
+//     async login() {
+//         alert("клик")
+//     const result = await this.$store.dispatch("login", this.form);
+//     console.log(result)
+//     this.token = result.token;
+//   }
 
     async vhod() {
+
+        const result = await this.$store.dispatch("login", this.form);
+        this.token = result.token;
+       if (result.success === true) {
+            this.OK_TRUE = "true"
+            this.info_push = result.message
+            window.location.href = 'profil'
+        }
+
+        else{
+            this.OK_FALSE = "true"
+            this.info_push = result.message
+        }
+    console.log(result)
+    console.log(result.success)
+
 
 // const result = await this.$store.dispatch("login", this.form);
 //     this.token = result.token;
 
-        const result = await axios.post('http://localhost:4200/login', this.form)
-        this.response = result.data
+        // const result = await axios.post('http://localhost:4200/login', this.form)
+        // this.response = result.data
 
         // this.response = "результат"
-        console.log(this.response)
+        // console.log(this.response)
         // console.log(result.data)
         // this.ffio = result.data.success
         // this.poi = result.data.data.job

@@ -1,5 +1,25 @@
 <template>
 <body> 
+
+    <div v-show="OK_TRUE" class="push" >
+        <div class="push_content">
+        
+        <div id="text_push_id" class="push_content_true">
+            <span>{{info_push}}</span>     
+<i class="bi bi-x-circle" style="padding-left: 10px;" @click="OK_TRUE = !OK_TRUE" ></i>
+        </div>
+        </div>
+    </div>
+
+    <div v-show="OK_FALSE" class="push" >
+        <div class="push_content">
+        
+        <div id="text_push_id" class="push_content_false">
+            <span>{{info_push}}</span>
+            <i class="bi bi-x-circle" style="padding-left: 10px;" @click="OK_FALSE = !OK_FALSE" ></i>
+        </div>
+        </div>
+    </div>
     
 
     <div class="registration">
@@ -17,11 +37,8 @@
     <hr class="hrSt">
 
     <p><input v-model="form.fio" class="inpStyle" placeholder="Фамилия Имя Отчество"> <br></p>
-
     <p><input v-model="form.pasport" type="text" class="inpStyle mask-pasport" id="pasport" placeholder="Паспорт: (серия, номер)" > <br></p>
-
     <p><input v-model="form.email" class="inpStyle" placeholder="Email"> <br></p>
-
     <p><input v-model="form.password" class="inpStyle" placeholder="Пароль"> <br></p>
     
     
@@ -43,24 +60,10 @@
 
 
 <script lang="ts">
-import $ from "jquery";
-// import inputmask from "inputmask";
-// $(document).ready(function(){
-
-//     // Телефоны
-//     $('#phone1').inputmask({"mask": "+7 (999) 999-9999"}); 
-//     });
 
 
-// var Inputmask = require('inputmask');
-// //es6
-// import Inputmask from "inputmask";
 
-// var pasport = document.getElementById("pasport");
-// var im = new Inputmask("99-9999999");
-// im.mask(pasport);
 
-// $('.mask-pasport').Inputmask('99 99 9999');
 
 import {
     Component,
@@ -68,36 +71,66 @@ import {
 } from "vue-property-decorator";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-// import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 
 @Component({
     components: {
-        // HelloWorld,
     },
 })
 
 export default class Home extends Vue {
+
+    data(){
+        return {
+OK_TRUE: false,
+OK_FALSE: false,
+info_push: "Успешная регистрация!!!",
+        } 
+        
+    }
+    
     
 form = {
-        fio : "",
-        pasport: "",
-        email : "",
-        password: ""
+        fio : "Кузнецов Семен Валерьевич",
+        pasport: "97 20 859220",
+        email : "leader@mail.ru",
+        password: "123456"
     }
 
     response = "ожидание"
+    token = "";
+    OK_TRUE = "false"
+    OK_FALSE = "false"
+    info_push = ""
+    color_push = ""
+
+    // close() {
+    //     this.OK_TRUE = "false"
+    //     this.OK_FALSE = "false"
+    //     console.log(this.OK_TRUE)
+    //     console.log(this.OK_FALSE)
+    //     alert("клик")
+    // }
 
     async registr() {
-        const result = await axios.post('http://localhost:4200/login', this.form)
-        this.response = result.data
-        console.log(this.response)
-        console.log(result.data)
-        // if (result.data.success === true) {
+        const result = await this.$store.dispatch("registration", this.form);
+        this.token = result.token;
+
+if (result.success === true) {
+            this.OK_TRUE = "true"
+            this.info_push = result.message
+            window.location.href = 'profil'
+        }
+
+        else{
+            this.OK_FALSE = "true"
+            this.info_push = result.message
+        }
+
+        // if (result.success === true) {
         //     window.location.href = 'profil'
         // }
-        // else{
-
-        // }
+    console.log(result)
+    console.log(result.success)
         
     }
 

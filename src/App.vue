@@ -26,13 +26,20 @@
                         <a class="nav-link" href="login">Вход и регистрация
                         </a>
                     </li>
+
                     <div v-show="true" id="ap">
+                        <div v-if="token">
                         <li class="nav-item">
-                          <!-- <login @vhod='vhodApp' /> -->
                             <a class="nav-link" href="profil" id="LKab">{{fio}}
                                 <i class="bi bi-person" style="font-size: 1.9rem; color: grey;"></i></a>
                         </li>
                     </div>
+
+                    <div v-else>
+                        </div>
+                    </div>
+
+                    
                 </ul>
             </div>
         </nav>
@@ -62,11 +69,11 @@
               Сотрудники</button>
         </form>
 
-        <form action="messages" >
+        <!-- <form action="messages" >
             <button type="submit" class="LeftNavbarButton">
               <i class="bi bi-envelope-check" style="padding-right: 5%;"></i>
               Мессенджер</button>
-        </form>
+        </form> -->
 
         <form action="registration" >
             <button type="submit" class="LeftNavbarButton">
@@ -87,71 +94,44 @@
         </form>        
         </div>
 
-        <!-- <div>
-            <b-row>
-    <b-col md="auto">
-      <b-calendar v-model="value" @context="onContext" locale="ru"></b-calendar>
-    </b-col>
-    <b-col>
-      <p>Значение: <b>'{{ value }}'</b></p>
-      <p class="mb-0">Контекст:</p>
-      <pre class="small">{{ context }}</pre>
-    </b-col>
-  </b-row>
-        </div> -->
+       
     </div>
 
 </body>
 </template>
 
 <script lang="ts">
-// export default {
-//     data() {
-//       return {
-//         value: '',
-//         context: null
-//       }
-//     },
-//     methods: {
-//       onContext(ctx) {
-//         this.context = ctx
-//       }
-//     }
-//   }
-
-// import {
-//     Component,
-//     Vue
-// } from "vue-property-decorator";
+import {
+    Component,
+    Vue
+} from "vue-property-decorator";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import login from './views/Login.vue'
-// import registration from './views/Registration.vue'
+import axios from "axios";
+
+@Component({
+    components: {
+    },
+})
+export default class Home extends Vue {
+    data (){
+        return{
+            fio: ''
+        }
+    }
 
 
-// @Component({
-//     components: {},
-// })
+    response = "ожидание"
+    // ffio = "qwe"
+    // poi = "0"
+    token = "";
 
-export default  {
-data () {
-  return {
-    fio: ''
+    mounted() {
+    this.token = localStorage.token;
+    console.log(this.token)
   }
-},
 
-methods: {
- vhodApp (data: any) {
-  //  this.fio = data.fio
-   console.log(data)
- }
-},
-
-components: {
-  // login,
-  // registration
-}
-
-
+    
+    
 }
 </script>
 

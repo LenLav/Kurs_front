@@ -16,12 +16,30 @@
 
 
 
-                
+                 <table class="TableCheck">
+          <tr>
+            <td class="TdLev">Должность:</td>
+            <input type="text" class="Input_edit_profil" v-model="form.job" autofocus>
+            <!-- <td class="TdPrav">{{JOB}}</td> -->
+          </tr>
+          <tr>
+            <td class="TdLev">Дата рождения:</td>
+            <input type="text" class="Input_edit_profil" v-model="form.birthday">
+          </tr>
+          <tr>
+            <td class="TdLev">Email:</td>
+            <input type="text" class="Input_edit_profil" v-model="form.email">
+          </tr>
+          <tr>
+            <td class="TdLev">Пол:</td>
+            <input type="text" class="Input_edit_profil" v-model="form.male">
+          </tr>
+           </table>
 
 
 
 
-                <div class="containerInfo">
+                <!-- <div class="containerInfo">
                     <div class="razmer">
                         <p class="infoLev">Должность:</p>
                         <p class="infoLev">Дата рождения:</p>
@@ -44,7 +62,7 @@
                             </p>
                     </div>
 
-                </div>
+                </div> -->
                 
 
                 <p class="Profil_info_blok">Дополнительная информация</p>
@@ -108,20 +126,9 @@ export default class Home extends Vue {
         marital_status: "женат",
         amount_of_children: "1"
     }
-    // response = "ожидание действий пользователя"
-    // responseMass = "массив"
-    // message_false = ""
+    
 
-    // async addMessage() {
-    //     this.message_false = ""
-    //     const result = await axios.post('http://localhost:4116/messages', this.form)
-    //     this.response = result.data
-
-    //     if (result.data.success === false) {
-    //         this.message_false = result.data.message
-    //     }
-    //     console.log(this.message_false)
-    // }
+    
 
     
 }

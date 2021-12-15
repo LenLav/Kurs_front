@@ -15,7 +15,7 @@
       <p>Новость 3</p>
     </div>
 
-    <p><button type="button" class="btn btn-outline-success" @click="click()">Click</button> <br></p>
+    <!-- <p><button type="button" class="btn btn-outline-success" @click="click()">Click</button> <br></p> -->
         <!-- <p><button type="button" class="btn btn-outline-success" v-on:click="visible=!visible">Click2</button> <br></p> -->
 
 

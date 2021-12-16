@@ -1,12 +1,11 @@
 <template>
   <div class="database">
-    <h1>Список сотрудников</h1>
+    <h1 class="color_LB">Список сотрудников</h1>
 
 <div class="tableContainer">
     <table id="myTable" class="table tablesorter table-hover table-bordered table-striped table-light">
           <thead>
             <tr class="tableSize">
-              <!-- <th scope="col">Id <button type="button" class="btn" @click="sortF()">⇅</button></th> -->
               <th scope="col">ФИО</th>
               <th scope="col">Паспорт</th>
               <th scope="col">Дата рождения</th>

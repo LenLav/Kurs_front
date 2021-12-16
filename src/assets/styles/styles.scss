@@ -1,11 +1,33 @@
 $DarckBlue: #2a5885;
+$LightBlue: #b7c4cf;
 $margin: 16px;
 
+.color_LB{
+    color: $LightBlue;
+    // background: linear-gradient(45deg, #4f5c70, #2758a7);
+}
+
+.color_DB{
+    color: #2a5885;
+    // background: linear-gradient(45deg, #4f5c70, #2758a7);
+}
+
 body {
-    height: 1px;
-    background: linear-gradient(45deg, #f5f7fa, #c7d2e4);
+    // background: linear-gradient(45deg, #f5f7fa, #c7d2e4);
+
+    background-image: url('~@/img/Fon11.jpg');
+    
+
+    background-position: right bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    // background-color: rgba(185, 91, 91, 0.5);
+
+    
     font-family: Tahoma;
-    color: $DarckBlue;
+    color: #b7c4cf;
 }
 
 h5{
@@ -16,8 +38,7 @@ h5{
 //.......расположение основных контейнеров и отступы сверху......//
 .home,
 .database,
-.messages,
-.news {
+.messages {
     // border: 1px solid orange;
     margin-top: 40px;
     width: 83%;
@@ -28,7 +49,8 @@ h5{
 .login,
 .EditProfil,
 .profil,
-.registration {    
+.registration,
+.news {    
     // border: 1px solid orange;
     width: 83%;
     margin-right: auto;
@@ -65,7 +87,8 @@ h5{
     margin-right: auto;
     height: 50px;
     width: 55%;
-    color: #4b5a75;
+    // color: #4b5a75;
+    color: $LightBlue;
 }
 
 .Profil_info_Hr {
@@ -286,24 +309,7 @@ table.text  {
 
 
 
-//    .push{
-//     margin-top: 60px;
-//        background-color: green;
-//        color: white;
-//        width: 250px;
-//        height: 50px;
-//        margin-right: 0px;
-//        margin-left: auto;
-//        border-radius: 5px;
 
-//     //    margin-right: 20px;
-//    }
-
-//    .text_push{
-//     // vertical-align: middle;
-//     height: 25px;
-//     // text-align: left;
-//    }
 
 .push{
     position: fixed;
@@ -311,6 +317,14 @@ table.text  {
     right: 16px;
     z-index: 10;
 
+}
+
+.add_news{
+    position: fixed;
+    top: 180px;
+    right: 20%;
+    
+    z-index: 10;
 }
 
 .push_content_true{
@@ -322,6 +336,31 @@ table.text  {
     justify-content: space-between;
     align-items: center;
     height: 50px;
+        }
+
+        .add_news_content{
+            padding: 16px;
+    background-color: rgb(226, 213, 26);
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 300px;
+    width: 1000px;
+        }
+
+
+        .add_content_news{
+            padding: 16px;
+            background-color: rgb(226, 213, 26);
+            border-radius: 5px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+            
         }
 
         .push_content_false{
@@ -347,3 +386,32 @@ table.text  {
                     align-items: center;
                     height: 50px;
                         }
+
+/////////////////////////////
+.block_news{
+    background-color: rgb(255, 255, 255);
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 5px;
+    
+}
+
+.block_news_P{
+    text-align: justify ;
+    padding: 0 20px 0px 20px;
+    margin-bottom: 0;
+    font-size: 15px;    
+    color: rgb(16, 16, 17);
+}
+
+.data_news{
+    font-size: 13px; 
+}
+
+.HR_news{
+    color: $DarckBlue;
+}

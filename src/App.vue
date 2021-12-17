@@ -173,6 +173,7 @@ export default class Home extends Vue {
 
   position: fixed;
   top: 40px;
+  z-index: 100;
 }
 
 .LeftNavbarButton {

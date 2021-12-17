@@ -21,7 +21,7 @@
               <!-- <th scope="col">Сообщения</th> -->
               <!-- <th scope="col">Хобби</th> -->
               <th scope="col">Логин</th>
-              <th scope="col">Удалить</th>
+              <!-- <th scope="col">Удалить</th> -->
             </tr>
           </thead>
           <tbody>
@@ -54,7 +54,7 @@
               <td>{{}}</td> -->
               <!-- <td class="align-middle">{{ new Date(user.createdAt).toLocaleString() }}</td> -->
               <td class="align-middle">{{ user.email }}</td>
-              <td class="align-middle"><button type="button" class="btn btn-outline-danger">Удалить</button></td>
+              <!-- <td class="align-middle"><button type="button" class="btn btn-outline-danger">Удалить</button></td> -->
             </tr>
           </tbody>
         </table>

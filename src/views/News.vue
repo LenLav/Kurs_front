@@ -1,27 +1,31 @@
 <template>
 <body>
 
-<div v-show="OK_TRUE" class="push" >
+<div v-show="OK_TRUE" class="push" @click="add_new()">
         <div class="push_content">
         
-        <div class="push_content_news">
+        <div class="push_content_news" >
           <i class="bi bi-plus-circle" style="padding-right: 10px;"></i>
             <span>Добавить новость</span>     
         </div>
         </div>
     </div>
 
-    <!-- <div v-show="OK_TRUE" class="add_news" >
-        <div class="add_news_content">
+    <div v-show="add_news_TRUE" class="add_news" >
+        <!-- <div class="add_news_content"> -->
         
         <div class="add_content_news">
-          <i class="bi bi-plus-circle" style="padding-right: 10px;"></i>
-            <span>Добавить новость</span>     
+          <h4>Форма добавления новости <i class="bi bi-x-lg close_icon" @click="add_news_TRUE = !add_news_TRUE"></i></h4>
+          
+            <span>Добавление новой записи</span> 
+            <p ><button type="button" class="osnovnButton" @click="logout()" >Сохранить</button></p>    
         </div>
-        </div>
-    </div> -->
+        <!-- </div> -->
+    </div>
 
   <div class="news" >
+
+<div v-show="Block_news_TRUE">
 
 <div class="block_news color_DB">
   <h4>Заголовок</h4>
@@ -48,20 +52,8 @@
 </div>
 
 
+</div>
 
-    <!-- <div>
-      <p>Новость 1</p>
-    <hr class="hrSt">
-    </div>
-    
-    <div>
-      <p>Новость 2</p>
-    <hr class="hrSt">
-    </div>
-    
-    <div>
-      <p>Новость 3</p>
-    </div> -->
 
   </div>
 </body>  
@@ -87,14 +79,16 @@ export default class Home extends Vue {
   data(){
         return {
 OK_TRUE: false,
-        } 
-        
+add_news_TRUE : false,
+Block_news_TRUE : true,
+        }         
     }
 
 token = "";
 
-
 OK_TRUE = "false"
+add_news_TRUE = "false"
+Block_news_TRUE = "true"
 
 async mounted() {
     this.token = localStorage.token;
@@ -107,7 +101,17 @@ async mounted() {
             console.log(this.OK_TRUE)            
         }
   }
+
+  async add_new() {
+    this.add_news_TRUE = "true"
+    // this.Block_news_TRUE = "false"
+    // this.OK_TRUE = 'false'
+    // console.log(this.Block_news_TRUE)
+  // alert ("rtyu")
 }
+}
+
+
 </script>
 
 

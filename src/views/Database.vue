@@ -81,15 +81,9 @@ export default class Home extends Vue {
   async mounted() {
     const result = await this.$store.dispatch("usersList");
     this.users = result.data;
+    console.log(result.data)
+    console.log(result.data[1].id)
 
-
-    // await axios({ method: "GET", url: "http://localhost:4200/users" }).then(
-    //   (result) => {
-    //     this.users = result.data.data;
-    //     // console.log(this.users);
-    //     // console.log(this.users_message);
-    //   }
-    // );
   };  
 }
 </script>

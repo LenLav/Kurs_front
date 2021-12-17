@@ -67,6 +67,14 @@ const routes: Array<RouteConfig> = [
     component: () =>
       import( "../views/Kalendar.vue"),
   },
+  {
+    path: "/tekhpodderzhka",
+    name: "Tekhpodderzhka",
+    component: () =>
+      import( "../views/Tekhpodderzhka.vue"),
+  },
+
+
 ];
 
 const router = new VueRouter({

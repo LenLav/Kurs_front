@@ -16,7 +16,10 @@
             <div style="padding:  3% 0% 3% 0%;">
                 <img class="card-photo" src="../img/Profil3.jpg" alt="Фото пользователя">
             </div>
-            <h5 style="color: black; padding-bottom: 20px;">{{FIO}}</h5>
+            <h5 style="color: black; padding-bottom: 20px;">{{FIO}}
+              <i v-show="check_TRUE" class="bi bi-check-circle"></i>
+            </h5>
+            
 
             <p class="Profil_info_blok">Основная информация</p>
             <hr class="Profil_info_Hr" style="margin-top: -20px;">
@@ -78,7 +81,7 @@
             </div>
             
             <p ><button type="button" class="osnovnButton" @click="delete_profil()" >Удалить профиль <i class="bi bi-trash-fill"></i></button></p>
-            <p ><button type="button" class="osnovnButton" @click="logout()" >Выйти <i class="bi bi-box-arrow-right"></i></button></p>
+            <!-- <p ><button type="button" class="osnovnButton" @click="logout()" >Выйти <i class="bi bi-box-arrow-right"></i></button></p> -->
             
 
         </div>
@@ -103,6 +106,7 @@ export default class Home extends Vue {
         return {
 OK_TRUE: false,
 OK_FALSE: false,
+check_TRUE: false,
 info_push: "Успешная аутентификация",
         } 
         
@@ -121,6 +125,7 @@ MARITAL_STATUS = ""
 PASPORT = ""
 
 OK_TRUE = "false"
+check_TRUE = "false"
 info_push = ""
 
 async mounted() {
@@ -140,6 +145,10 @@ async mounted() {
     this.SALARY = result.salary
     this.MARITAL_STATUS = result.marital_status 
     this.PASPORT = result.pasport   
+
+    if (result.isAdmin === true) {
+            this.check_TRUE = "true"
+        }
   }
 
   async logout() {

@@ -1,9 +1,10 @@
 $DarckBlue: #2a5885;
 $LightBlue: #b7c4cf;
+$Gray: #55677d;
 $margin: 16px;
 
 .color_LB{
-    color: $LightBlue;
+    color: $LightBlue !important;
     // background: linear-gradient(45deg, #4f5c70, #2758a7);
 }
 
@@ -50,7 +51,8 @@ h5{
 .EditProfil,
 .profil,
 .registration,
-.news {    
+.news,
+.tekhpodderzhka {    
     // border: 1px solid orange;
     width: 83%;
     margin-right: auto;
@@ -88,7 +90,7 @@ h5{
     height: 50px;
     width: 55%;
     // color: #4b5a75;
-    color: $LightBlue;
+    color: $DarckBlue;
 }
 
 .Profil_info_Hr {
@@ -275,6 +277,7 @@ h5{
     height: 35px;
     color: #55677d;
     font-size: 15px;
+    margin-bottom: 15px;
     //  margin-top: 10px;
     // text-align: center;
     // padding-left: 10%; 
@@ -427,9 +430,39 @@ box-shadow: 4px 4px 32px 1000px rgba(0, 0, 0, 0.7);
 
 .close_icon{
     position: fixed;
-    top: 150px;
+    top: calc(10px + 150px);
     right: 120px;
     // left: calc(17% + 100px);    
     z-index: 12;
+}
+
+.container_add_new{
+    width: 90%;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.info_add_new{
+    width: 100%;
+    height: 150px;
+    font-size: 15px;    
+    color: rgb(16, 16, 17);
+}
+
+.Head_add_new{
+    width: 100%;
+    font-size: 15px;    
+    color: rgb(16, 16, 17);
+}
+
+.p_add_new{
+    text-align: left;
+    margin-bottom: 0;    
+    color: $Gray;
+}
+
+.h4_new{
+    padding-top: 10px;
+    color: $Gray;
 }
 

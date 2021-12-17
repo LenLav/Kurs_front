@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav w-100 justify-content-end">
             <div>
-              <div v-if="!token">
+              <div v-if="token">
                 <li class="nav-item" style="padding-top: 16px">
                   <a class="nav-link" href="login">Вход и регистрация </a>
                 </li>
@@ -104,14 +104,14 @@
           </button>
         </form>
 
-        <form action="kalendar">
+        <!-- <form action="kalendar">
           <button type="submit" class="LeftNavbarButton">
             <i class="bi bi-calendar3" style="padding-right: 5%"></i>
             Календарь
           </button>
-        </form>
+        </form> -->
 
-        <form action="registration">
+        <form action="tekhpodderzhka">
           <button type="submit" class="LeftNavbarButton">
             <i class="bi bi-question-octagon" style="padding-right: 5%"></i>
             Техподдержка

@@ -285,6 +285,18 @@ h5{
     &:hover{background-color: #c2ced8;}
 }
 
+.But_Yes{
+    background-color: rgba(0, 128, 0, 0.7);
+    color: white;
+    margin: 10px 10px 20px 10px;
+}
+
+.But_No{
+    background-color: rgba(209, 0, 0, 0.7);
+    color: white;
+    margin: 10px 10px 20px 10px;
+}
+
 
 //................заголовок регистрации.................//
 .backIcon{
@@ -462,7 +474,8 @@ box-shadow: 4px 4px 32px 1000px rgba(0, 0, 0, 0.7);
 }
 
 .h4_new{
-    padding-top: 10px;
+    // padding-top: 10px;
+    padding: 10px 20px 0px 20px;
     color: $Gray;
 }
 

@@ -1,5 +1,16 @@
 <template>
 <body class="body">
+
+    <div v-show="OK_TRUE" class="push">
+        <div class="push_content">
+
+            <div class="push_content_true">
+                <span>{{info_push}}</span>
+                <i class="bi bi-x-circle" style="padding-left: 10px;" @click="OK_TRUE = !OK_TRUE"></i>
+            </div>
+        </div>
+    </div>
+
     <div class="EditProfil">
         <div class="Profil">
 
@@ -7,9 +18,9 @@
                 <div style="padding:  3% 0% 3% 0%;">
                     <img class="card-photo" src="../img/Profil3.jpg" alt="Фото пользователя">
                 </div>
-                <h5 style="color: black; padding-bottom: 20px;">
-                    <input type="text" class="Input_fio_edit_profil" v-model="form.fio">
-                    </h5>
+                <h5 style="color: black; padding-bottom: 20px;">{{FIO}}
+                <i v-show="ADMIN" class="bi bi-check-circle" style="color: green;" data-bs-toggle="tooltip" title="Администратор"></i>
+            </h5>
 
                 <p class="Profil_info_blok">Основная информация</p>
                 <hr class="Profil_info_Hr" style="margin-top: -20px;">
@@ -37,33 +48,6 @@
            </table>
 
 
-
-
-                <!-- <div class="containerInfo">
-                    <div class="razmer">
-                        <p class="infoLev">Должность:</p>
-                        <p class="infoLev">Дата рождения:</p>
-                        <p class="infoLev">Email:</p>
-                        <p class="infoLev">Пол:</p>
-                    </div>
-
-                    <div class="razmer">
-                        <p class="infoPrav">
-                            <input type="text" class="Input_edit_profil" v-model="form.job" autofocus>
-                            </p>
-                        <p class="infoPrav">
-                            <input type="text" class="Input_edit_profil" v-model="form.birthday">
-                            </p>
-                        <p class="infoPrav">
-                            <input type="text" class="Input_edit_profil" v-model="form.email">
-                            </p>
-                        <p class="infoPrav">
-                            <input type="text" class="Input_edit_profil" v-model="form.male">
-                            </p>
-                    </div>
-
-                </div> -->
-                
 
                 <p class="Profil_info_blok">Дополнительная информация</p>
                 <hr class="Profil_info_Hr" style="margin-top: -20px;">
@@ -103,6 +87,9 @@
 </body>
 </template>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="jquery.maskedinput.js" type="text/javascript"></script>
+
 <script lang="ts">
 import axios from 'axios';
 import {
@@ -115,6 +102,34 @@ import {
 })
 
 export default class Home extends Vue {
+
+data() {
+        return {
+            OK_TRUE: false,
+            ADMIN: false,
+            LODIN_SHOW: true,
+            EMAIL_SHOW: false,
+            info_push: "Успешная аутентификация",
+        }
+    }
+
+    token = "";
+    FIO = ""
+    BIRTHDAY = ""
+    MALE = ""
+    EMAIL = ""
+    JOB = ""
+    SALARY = ""
+    DATE_OF_RECEIPT = ""
+    AMOUNT_OF_CHILDREN = ""
+    MARITAL_STATUS = ""
+    PASPORT = ""
+    LODIN = ""
+
+    OK_TRUE = false
+    ADMIN = false
+    info_push = ""
+
     form = {
         fio: "Петров Станислав Александрович",
         job: "Директор",
@@ -128,7 +143,45 @@ export default class Home extends Vue {
     }
     
 
-    
+    async mounted() {
+        this.token = localStorage.token;
+
+        const result = await this.$store.dispatch("me_inform");
+
+        
+            this.OK_TRUE = true
+            let vm = this;
+            setTimeout(function () {
+                vm.OK_TRUE = false
+            }, 2000);
+        
+
+        if (result.isAdmin === true) {
+            this.ADMIN = true
+        }
+
+        this.FIO = result.fio
+        this.BIRTHDAY = result.birthday
+        this.MALE = result.male
+        this.EMAIL = result.email
+        this.JOB = result.job
+        this.DATE_OF_RECEIPT = result.date_of_receipt
+        this.AMOUNT_OF_CHILDREN = result.amount_of_children
+        this.SALARY = result.salary
+        this.MARITAL_STATUS = result.marital_status
+        this.PASPORT = result.pasport
+
+        var poi = this.EMAIL.split("@");
+        console.log(poi[0])
+        console.log(poi[1])
+        var log = poi[0][0] + poi[0][1]
+
+         for (let i = 2; i < poi[0].length; i++) {log += '*'}
+
+        log += '@' + poi[1]
+        console.log(log)
+        this.LODIN = log
+    }
 
     
 }

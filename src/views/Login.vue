@@ -79,6 +79,9 @@
 </body>
 </template>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="jquery.maskedinput.js" type="text/javascript"></script>
+
 <script lang="ts">
 import {
     Component,
@@ -110,8 +113,8 @@ info_push: "Успешная регистрация!!!",
     response = "ожидание"
     token = "";
 
-    OK_TRUE = "false"
-    OK_FALSE = "false"
+    OK_TRUE = false
+    OK_FALSE = false
     info_push = ""
     
 
@@ -141,21 +144,25 @@ info_push: "Успешная регистрация!!!",
     //     }
 
        if (result.success === true) {
-            this.OK_TRUE = "true"
+            this.OK_TRUE = true
             this.info_push = result.message
-            window.location.href = 'profil'
+
+            setTimeout(function () {
+                window.location.href = 'profil'
+            }, 1000);
         }
 
         else{
-            this.OK_FALSE = "true"
+            this.OK_FALSE = true
             this.info_push = result.message
+            
+            let vm = this;
+            setTimeout(function () {
+                vm.OK_FALSE = false
+            }, 4000);
         }
     console.log(result)
     console.log(result.success)
     }
 }
 </script>
-
-<style lang="scss">
-
-</style>

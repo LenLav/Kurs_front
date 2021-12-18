@@ -1,7 +1,7 @@
 <template>
 <body>
 
-    <div v-show="OK_TRUE" class="push" @click="add_new()">
+    <div v-show="list_problem_TRUE" class="push" @click="add_new()">
         <div class="push_content">
             <div class="push_content_news">
                 <span>Показать список проблем</span>
@@ -11,7 +11,7 @@
 
 
 
-    <div v-show="OK_TRUE" class="add_news">
+    <div v-show="false" class="add_news">
 
         <div class="add_content_news">
             <h4 class="h4_new">Опишите свою проблему<i class="bi bi-x-lg close_icon" @click="add_news_TRUE = !add_news_TRUE"></i></h4>
@@ -29,6 +29,11 @@
 
 
     <div class="news">
+      <div class="block_news color_DB">
+                <h4>Опишите свою проблему</h4>
+                <p><textarea class="tekh_input" v-model="form.info"></textarea></p>
+                <p><button type="button" class="osnovnButton" style="" @click="save_new()">Отправить</button></p>
+            </div>
 
 
         </div>
@@ -54,6 +59,7 @@ export default class Home extends Vue {
             OK_TRUE: false,
             add_news_TRUE: false,
             Block_news_TRUE: true,
+            list_problem_TRUE: false
         }
     }
 
@@ -62,11 +68,11 @@ export default class Home extends Vue {
     OK_TRUE = "false"
     add_news_TRUE = "false"
     Block_news_TRUE = "true"
+    list_problem_TRUE = "false"
     news = []
 
     form = {
-        Head : "1",
-        info: "11"
+        info: ""
     }
     
 
@@ -82,6 +88,9 @@ export default class Home extends Vue {
 
         if (result.isAdmin !== true) {
             this.OK_TRUE = "true"
+        }
+        else{
+          this.list_problem_TRUE = "true"
         }
     }
 

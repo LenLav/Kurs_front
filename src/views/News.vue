@@ -1,12 +1,21 @@
 <template>
 <body>
 
-    <div v-show="OK_TRUE" class="push" @click="add_new()">
+    <div v-show="ADMIN" class="push" @click="add_new()">
         <div class="push_content">
             <div class="push_content_news">
                 <i class="bi bi-plus-circle" style="padding-right: 10px;"></i>
                 <span>Добавить новость</span>
             </div>
+        </div>
+    </div>
+
+    <div v-show="Push_add_new" class="push" >
+        <div class="push_content">        
+        <div class="push_content_true">
+            <span>Новость успешно опубликована</span>     
+<i class="bi bi-x-circle" style="padding-left: 10px;" @click="ADMIN = !ADMIN" ></i>
+        </div>
         </div>
     </div>
 
@@ -38,11 +47,13 @@
           <div v-for="neew in news.slice().reverse()" :key="neew.id">
 
             <div class="block_news color_DB">
-                <h4>{{neew.Head}}</h4>
+                <h4 class="h4_new">{{neew.Head}}</h4>
                 <hr class="HR_news">
                 <p class="block_news_P">{{neew.info}}</p>
                 <hr class="HR_news">
                 <p class="data_news">{{ new Date(neew.createdAt).toLocaleString() }}</p>
+                
+                <p  v-show="ADMIN"><button class="osnovnButton" @click="newDelete(neew.id)">Удалить </button></p>
             </div>
 
             <hr class="hrSt color_LB">
@@ -82,6 +93,7 @@ import {
     Vue
 } from "vue-property-decorator";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
 
 @Component({
     components: {},
@@ -91,18 +103,22 @@ export default class Home extends Vue {
 
     data() {
         return {
-            OK_TRUE: false,
+            ADMIN: false,
             add_news_TRUE: false,
             Block_news_TRUE: true,
+            Push_add_new: false
         }
     }
 
     token = "";
 
-    OK_TRUE = "false"
+    ADMIN = "false"
     add_news_TRUE = "false"
     Block_news_TRUE = "true"
+    Push_add_new = "false"
     news = []
+    URL = ""
+    qwe = ""
 
     form = {
         Head : "1",
@@ -121,8 +137,10 @@ export default class Home extends Vue {
         console.log(result_news.data[1].info)
 
         if (result.isAdmin === true) {
-            this.OK_TRUE = "true"
+            this.ADMIN = "true"
         }
+
+        
     }
 
     async add_new() {
@@ -132,8 +150,35 @@ export default class Home extends Vue {
     async save_new() {
       const result = await this.$store.dispatch("create_new", this.form);
       console.log(result)
-      alert("erty")
+      if (result.success === true) {
+        this.Push_add_new = "true"
+        window.location.reload();        
+            // this.OK_TRUE = "true"
+        }
     }
+
     
+    async newDelete(id: any) {
+      this.URL = "http://localhost:4200/news/delete/" + id
+      alert(this.URL)
+
+      const res = await axios.delete(this.URL);
+      
+
+
+
+
+    // await axios({ method: "DELETE", url: this.URL }).then(
+    //   (result) => {
+    //     this.qwe = result.data 
+    //     console.log(this.qwe)       
+    //   }
+    // )
+  }
+
+  
+    
+    
+
 }
 </script>

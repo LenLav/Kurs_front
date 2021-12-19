@@ -118,12 +118,6 @@ info_push: "Успешная регистрация!!!",
     info_push = ""
     
 
-//     async login() {
-//         alert("клик")
-//     const result = await this.$store.dispatch("login", this.form);
-//     console.log(result)
-//     this.token = result.token;
-//   }
 
     async vhod() {
         const result = await this.$store.dispatch("login", this.form);
@@ -131,9 +125,6 @@ info_push: "Успешная регистрация!!!",
         // console.log(result.message)
         // console.log(result)
 
-        if (this.token === "") {
-            console.log("ytr")
-        }
 
         
         console.log(this.token)

@@ -225,6 +225,7 @@ h5{
     text-decoration-line: none;
     color: #818c99;
     font-size: 13px;
+    cursor: default;
 
     &:hover {text-decoration-line: underline;}
 }
@@ -437,8 +438,35 @@ box-shadow: 4px 4px 32px 1000px rgba(0, 0, 0, 0.7);
     color: rgb(16, 16, 17);
 }
 
+.tabl_news_data_del{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    // padding: 0, auto, 10px, auto;
+    // border: 1px solid rgb(252, 101, 244);
+}
+
 .data_news{
     font-size: 13px; 
+    // border: 1px solid orange;
+    // text-align: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.del_news{
+    font-size: 13px;
+    text-align: right;
+    color: red;
+    margin-bottom: 0;
+    margin-right: 20px;
+
+    &:hover {
+        text-decoration-line: underline;
+        color: rgb(0, 4, 255);
+    }
 }
 
 .HR_news{
@@ -513,4 +541,6 @@ canvas{
     display: block;
     margin: 0 auto;
 }
+
+
 

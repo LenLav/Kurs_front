@@ -57,10 +57,21 @@
                 <h4 class="h4_new">{{neew.Head}}</h4>
                 <hr class="HR_news">
                 <p class="block_news_P">{{neew.info}}</p>
-                <hr class="HR_news">
-                <p class="data_news">{{ new Date(neew.createdAt).toLocaleString() }}</p>
+                <hr v-show="!ADMIN" class="HR_news" style="margin-bottom: 0;">  
 
-                <p v-show="ADMIN"><button class="osnovnButton" @click="get_id_new(neew.id)">Удалить </button></p>
+                <p v-show="ADMIN" class="del_news" @click="get_id_new(neew.id)">удалить</p>
+                <hr v-show="ADMIN" class="HR_news" style="margin-bottom: 0; margin-top: 0;">    
+
+                <p class="data_news">{{ new Date(neew.createdAt).toLocaleString() }} </p>
+                <!-- <table class="tabl_news_data_del">
+                <tr>
+                    <td class="data_news">{{ new Date(neew.createdAt).toLocaleString() }}</td>
+                    <td class="del_news">удалить</td>
+                </tr>
+                </table> -->
+               
+
+                <!-- <p v-show="ADMIN"><button class="osnovnButton" @click="get_id_new(neew.id)">Удалить </button></p> -->
             </div>
 
             <hr class="hrSt color_LB">

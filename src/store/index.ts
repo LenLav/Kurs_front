@@ -50,6 +50,13 @@ export default new Vuex.Store({
       return data;
     },
 
+    async delete_profil({ state, commit, rootState }, params) {
+      const url = "/users/delete_profil/" + params
+      const { data } = await instance.delete(url);
+      commit("setToken", "");
+      return data;
+    },
+
     async me_inform({ state, commit, rootState }) {
       const { data } = await instance.get("/users/me_inform");
       // const token = data.success ? data.token : "";

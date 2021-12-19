@@ -11,6 +11,17 @@
         </div>
     </div>
 
+  <div v-show="question_TRUE" class="add_news">
+
+        <div class="add_content_news" >
+            <h4 class="h4_new">Вы уверены, что хотите удалить профиль? <i class="bi bi-x-lg close_icon" @click="question_TRUE = !question_TRUE"></i></h4>
+
+            <p><button type="button" class="osnovnButton But_Yes" style="" @click="delete_profil()">Да</button>
+                <button type="button" class="osnovnButton But_No" style="" @click="question_TRUE = !question_TRUE">Нет</button></p>
+        </div>
+
+    </div>
+
     <div class="profil">
         <div class="formaPolzovatelya">
             <div style="padding:  3% 0% 3% 0%;">
@@ -39,8 +50,8 @@
                 </tr>
                 <tr>
                     <td class="TdLev">Email:</td>
-                    <td v-show="LODIN_SHOW" class="TdPrav">{{LODIN}} <i class="bi bi-eye-slash" style="padding-left: 10px;" @click="LODIN_SHOW = !LODIN_SHOW; EMAIL_SHOW = !EMAIL_SHOW"></i></td>
-                    <td v-show="EMAIL_SHOW" class="TdPrav">{{EMAIL}} <i class="bi bi-eye-slash" style="padding-left: 10px;" @click="LODIN_SHOW = !LODIN_SHOW; EMAIL_SHOW = !EMAIL_SHOW"></i></td>
+                    <td v-show="LODIN_SHOW" class="TdPrav">{{LODIN}} <i class="bi bi-eye-slash" style="padding-left: 10px;" @click="LODIN_SHOW = !LODIN_SHOW"></i></td>
+                    <td v-show="!LODIN_SHOW" class="TdPrav">{{EMAIL}} <i class="bi bi-eye-slash" style="padding-left: 10px;" @click="LODIN_SHOW = !LODIN_SHOW"></i></td>
                 </tr>
                 <tr>
                     <td class="TdLev">Пол:</td>
@@ -49,7 +60,20 @@
             </table>
 
             <div class="editDiv">
-                <a class="edit" href="/profil_edit">Редактировать <i class="bi bi-pencil-fill" style="font-size: 1rem;"></i></a>
+              <a v-show="edit_log" class="edit" @click="edit_log_TRUE = !edit_log_TRUE; edit_log = !edit_log;">Изменить логин<i class="bi bi-pencil-fill"></i></a>
+                <a v-show="!edit_log" class="edit" @click="edit_log_TRUE = !edit_log_TRUE; edit_log = !edit_log;">Отмена</a>
+            </div>
+
+            <div v-show="edit_log_TRUE">
+              <hr class="Profil_info_Hr">
+              <table class="TableCheck">
+                <tr>
+                    <td class="TdLev">Новый логин</td>
+                    <td class="TdPrav"><input  type="text"></td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0; margin-top: 10px;"><button type="button" class="osnovnButton" @click="save_log()">Сохранить</button></p>
+              <hr class="Profil_info_Hr" style="margin-bottom: 10px;">
             </div>
 
             <p class="Profil_info_blok">Дополнительная информация</p>
@@ -75,11 +99,32 @@
             </table>
 
             <div class="editDiv">
-                <a class="edit" href="/profil_edit">Редактировать <i class="bi bi-pencil-fill" style="font-size: 1rem;"></i></a>
+                <a v-show="edit_pass" class="edit" @click="edit_TRUE = !edit_TRUE; edit_pass = !edit_pass;">Изменить пароль<i class="bi bi-pencil-fill"></i></a>
+                <a v-show="!edit_pass" class="edit" @click="edit_TRUE = !edit_TRUE; edit_pass = !edit_pass;">Отмена</a>
             </div>
 
-            <p><button type="button" class="osnovnButton" @click="delete_profil()">Удалить профиль <i class="bi bi-trash-fill"></i></button></p>
-            <!-- <p ><button type="button" class="osnovnButton" @click="logout()" >Выйти <i class="bi bi-box-arrow-right"></i></button></p> -->
+            <div v-show="edit_TRUE">
+              <hr class="Profil_info_Hr">
+              <table class="TableCheck">
+                <tr>
+                    <td class="TdLev">Старый пароль</td>
+                    <td class="TdPrav"><input  type="password"></td>
+                </tr>
+                <tr>
+                    <td class="TdLev">Новый пароль</td>
+                    <td class="TdPrav"><input type="password"></td>
+                </tr>
+                <tr>
+                    <td class="TdLev">Повторите пароль</td>
+                    <td class="TdPrav"><input type="password"></td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0; margin-top: 10px;"><button type="button" class="osnovnButton" @click="save_password()">Сохранить</button></p>
+              <hr class="Profil_info_Hr" style="margin-bottom: 10px;">
+            </div>
+
+            <p><button  type="button" class="osnovnButton" @click="question_TRUE = !question_TRUE">Удалить профиль <i class="bi bi-trash-fill"></i></button></p>
+            
 
         </div>
     </div>
@@ -107,7 +152,11 @@ export default class Home extends Vue {
             OK_TRUE: false,
             ADMIN: false,
             LODIN_SHOW: true,
-            EMAIL_SHOW: false,
+            edit_TRUE: false,
+            edit_log_TRUE: false,
+            edit_pass: true,
+            edit_log: true,
+            question_TRUE: false,
             info_push: "Успешная аутентификация",
         }
     }
@@ -124,9 +173,11 @@ export default class Home extends Vue {
     MARITAL_STATUS = ""
     PASPORT = ""
     LODIN = ""
+    ID = ""
 
     OK_TRUE = false
     ADMIN = false
+    question_TRUE = false
     info_push = ""
 
     async mounted() {
@@ -146,6 +197,7 @@ export default class Home extends Vue {
             this.ADMIN = true
         }
 
+        this.ID = result.id
         this.FIO = result.fio
         this.BIRTHDAY = result.birthday
         this.MALE = result.male
@@ -158,11 +210,9 @@ export default class Home extends Vue {
         this.PASPORT = result.pasport
 
         var poi = this.EMAIL.split("@");
-        console.log(poi[0])
-        console.log(poi[1])
         var log = poi[0][0] + poi[0][1]
 
-         for (let i = 2; i < poi[0].length; i++) {log += '*'}
+        for (let i = 2; i < poi[0].length; i++) {log += '*'}
 
         log += '@' + poi[1]
         console.log(log)
@@ -177,9 +227,24 @@ export default class Home extends Vue {
     }
 
     async delete_profil() {
-        const result = await this.$store.dispatch("logout");
-        this.token = "";
-        window.location.href = 'login'
+      const result = await this.$store.dispatch("delete_profil", this.ID);
+
+      if (result.success === true) {
+            this.OK_TRUE = true
+            this.info_push = result.message
+            this.question_TRUE = false
+
+            setTimeout(function () {
+                window.location.href = 'login'
+            }, 1500);            
+        }
+
+
+      console.log(this.ID)
+      console.log(result)
+        // const result = await this.$store.dispatch("logout");
+        // this.token = "";
+        // window.location.href = 'login'
 
     }
 

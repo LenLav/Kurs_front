@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav w-100 justify-content-end">
             <div>
-              <div v-if="token">
+              <div v-if="!token">
                 <li class="nav-item" style="padding-top: 16px">
                   <a class="nav-link" href="login">Вход и регистрация </a>
                 </li>
@@ -66,11 +66,7 @@
         </div>
       </nav>
 
-      <!-- <div id="nav" style="margin-left: auto;">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link> |
-        <router-link to="/login">Вход</router-link>
-    </div> -->
+      
       <router-view />
       <!-- <p><button type="button" class="btn btn-outline-success" @click="register()">Кнопка</button> <br></p> -->
     </div>
@@ -173,7 +169,7 @@ export default class Home extends Vue {
 
   position: fixed;
   top: 40px;
-  z-index: 100;
+   z-index: 100;
 }
 
 .LeftNavbarButton {

@@ -2,6 +2,25 @@
 <body>
     <div class="analytics">
 
+        <div>
+            <div class="form-check form-check-inline">
+                <input @click="check_month()" class="form-check-input" type="radio" name="inlineRadioOptions" id="month" value="option1">
+                <label class="form-check-label" for="inlineRadio1">месяц</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input @click="check_quarter()" class="form-check-input" type="radio" name="inlineRadioOptions" id="quarter" value="option2" checked>
+                <label class="form-check-label" for="inlineRadio2">квартал</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input @click="check_half_year()" class="form-check-input" type="radio" name="inlineRadioOptions" id="half_year" value="option3">
+                <label class="form-check-label" for="inlineRadio3">полугодие</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input @click="check_year()" class="form-check-input" type="radio" name="inlineRadioOptions" id="year" value="option4">
+                <label class="form-check-label" for="inlineRadio3">год</label>
+            </div>
+        </div>
+
         <div class="container_chart">
             <!-- <mdb-container> -->
             <mdb-bar-chart class="line_chart" :data="barChartData_child" :options="barChartOptions" :width="600" :height="300"></mdb-bar-chart>
@@ -110,34 +129,7 @@ export default class Home extends Vue {
 
             barChartData_child: this.datacollection_children,
 
-            // barChartData: {
-            //     labels: [ "0", "1", "2", "3", "более 3" ],
-            //     datasets: [{
-            //         label: "Количество детей",
-            //         data: [12, 19, 3, 5, 2],
-
-            //         backgroundColor: [
-            //             "rgba(255, 99, 132, 0.2)",
-            //             "rgba(54, 162, 235, 0.2)",
-            //             "rgba(255, 206, 86, 0.2)",
-            //             "rgba(75, 192, 192, 0.2)",
-            //             "rgba(153, 102, 255, 0.2)",
-            //             // "rgba(255, 159, 64, 0.2)"
-            //         ],
-
-            //         borderColor: [
-            //             "rgba(255,99,132,1)",
-            //             "rgba(54, 162, 235, 1)",
-            //             "rgba(255, 206, 86, 1)",
-            //             "rgba(75, 192, 192, 1)",
-            //             "rgba(153, 102, 255, 1)",
-            //             // "rgba(255, 159, 64, 1)"
-            //         ],
-
-            //         borderWidth: 1
-            //     }]
-            // },
-
+           
             barChartOptions: {
                 responsive: false,
                 maintainAspectRatio: false,
@@ -158,106 +150,158 @@ export default class Home extends Vue {
                 }
             },
 
-            pieChartData: {
-          labels: ["Жен/ЗМ", "Хол/НЗ", "Разв.", "Вдов."],
-          datasets: [
-            {
-              data: [300, 50, 100, 40],
-              backgroundColor: [
-                "#F7464A",
-                "#46BFBD",
-                "#FDB45C",
-                "#949FB1"
-              ],
-              hoverBackgroundColor: [
-                "#FF5A5E",
-                "#5AD3D1",
-                "#FFC870",
-                "#A8B3C5"
-              ]
-            }
-          ]
-            },
+            pieChartData: this.datacollection_marital,
+
+            // pieChartData: {
+            //     labels: ["Жен/ЗМ", "Хол/НЗ", "Разв.", "Вдов."],
+            //     datasets: [{
+            //         data: [300, 50, 100, 40],
+            //         backgroundColor: [
+            //             "#F7464A",
+            //             "#46BFBD",
+            //             "#FDB45C",
+            //             "#949FB1"
+            //         ],
+            //         hoverBackgroundColor: [
+            //             "#FF5A5E",
+            //             "#5AD3D1",
+            //             "#FFC870",
+            //             "#A8B3C5"
+            //         ]
+            //     }]
+            // },
 
             pieChartOptions: {
-          responsive: false,
-          maintainAspectRatio: false,
-          plugins: {
-            datalabels: {
-              color: "white",
-              align: "center",
-              font: {
-                size: 16
-              },
-              formatter: value => {
-                const [dataset] = this.pieChartData.datasets;
-                const setValue = dataset.data.reduce((a, b) => a + b);
+                responsive: false,
+                maintainAspectRatio: false,
+                plugins: {
+                    datalabels: {
+                        color: "white",
+                        align: "center",
+                        font: {
+                            size: 16
+                        },
+                        formatter: value => {
+                            const [dataset] = this.pieChartData.datasets;
+                            const setValue = dataset.data.reduce((a, b) => a + b);
 
-                return `${Math.round((value / setValue) * 100)}%`;
-              }
-            }
-          }
-        },
-
+                            return `${Math.round((value / setValue) * 100)}%`;
+                        }
+                    }
+                }
+            },
 
         };
     }
 
-    
-
     async mounted() {
         this.token = localStorage.token;
 
-        this.GetData()
+        this.GetDataChild()
         console.log(this.datacollection_children)
+
+        this.check_quarter()
     }
 
     datacollection_children = {}
-    
+    datacollection_marital = {}
 
-    async GetData() {
-        this.children_mass = [12, 19, 3, 5, 4]
-        this.columnNames_children = [ "0", "1", "2", "3", "более 3" ]
-           
+    async GetDataChild() {
+        this.columnNames_children = ["0", "1", "2", "3", "более 3"]
 
         this.datacollection_children = {
-              labels: this.columnNames_children,
-              datasets: [
-                {
-                  label: "Количество детей",
-                  data: this.children_mass,
-                  backgroundColor: [
-                        "rgba(255, 99, 132, 0.2)",
-                        "rgba(54, 162, 235, 0.2)",
-                        "rgba(255, 206, 86, 0.2)",
-                        "rgba(75, 192, 192, 0.2)",
-                        "rgba(153, 102, 255, 0.2)",
-                        // "rgba(255, 159, 64, 0.2)"
-                    ],
+            labels: this.columnNames_children,
+            datasets: [{
+                label: "Количество детей",
+                data: this.children_mass,
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    // "rgba(255, 159, 64, 0.2)"
+                ],
 
-                    borderColor: [
-                        "rgba(255,99,132,1)",
-                        "rgba(54, 162, 235, 1)",
-                        "rgba(255, 206, 86, 1)",
-                        "rgba(75, 192, 192, 1)",
-                        "rgba(153, 102, 255, 1)",
-                        // "rgba(255, 159, 64, 1)"
-                    ],
+                borderColor: [
+                    "rgba(255,99,132,1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)",
+                    // "rgba(255, 159, 64, 1)"
+                ],
 
-                    borderWidth: 1
-                },
-              ]
-            }
+                borderWidth: 1
+            }, ]
+        }
 
         console.log(this.datacollection_children)
         this.barChartData_child = this.datacollection_children
 
+    }
 
-          }
+    async GetDataMarital() {
+        this.columnNames_marital = ["Жен/ЗМ", "Хол/НЗ", "Разв.", "Вдов."]
 
-          
-    
+        this.datacollection_marital = {
+            labels: this.columnNames_marital,
+            datasets: [{
+                    data: this.marital_mass,
+                    backgroundColor: [
+                        "#F7464A",
+                        "#46BFBD",
+                        "#FDB45C",
+                        "#949FB1"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF5A5E",
+                        "#5AD3D1",
+                        "#FFC870",
+                        "#A8B3C5"
+                    ]
+                }]
+        }
+
+        console.log(this.datacollection_marital)
+        this.pieChartData = this.datacollection_marital
+    }
+
+    check_month() {
+        console.log("check_month")
+        this.children_mass = [5, 7, 15, 3, 4]
+        this.marital_mass = [12, 7, 3, 0]
+
+        this.GetDataChild()
+        this.GetDataMarital()
+    }
+
+    check_quarter() {
+        console.log("check_quarter")
+        this.children_mass = [9, 17, 33, 7, 5]
+        this.marital_mass = [30, 15, 10, 1]
+
+        this.GetDataChild()
+        this.GetDataMarital()
+    }
+
+    check_half_year() {
+        console.log("check_half_year")
+        this.children_mass = [15, 27, 43, 12, 7]
+        this.marital_mass = [47, 22, 12, 3]
+
+        this.GetDataChild()
+        this.GetDataMarital()
+    }
+
+    check_year() {
+        console.log("check_year")
+        this.children_mass = [33, 58, 89, 20, 12]
+        this.marital_mass = [80, 69, 46, 12]
+
+        this.GetDataChild()
+        this.GetDataMarital()
+    }
 
 }
-
 </script>

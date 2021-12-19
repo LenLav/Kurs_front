@@ -1,11 +1,16 @@
 <template>
 <body>
     <div class="analytics">
+        
         <div class="container_chart">
-            
-            <mdb-container>
-                <mdb-bar-chart class="line_chart" :data="barChartData" :options="barChartOptions" :width="600" :height="300"></mdb-bar-chart>
-            </mdb-container>
+            <!-- <mdb-container> -->
+            <mdb-bar-chart class="line_chart" :data="barChartData" :options="barChartOptions" :width="600" :height="300"></mdb-bar-chart>
+            <!-- </mdb-container> -->
+        </div>
+
+        <div class="container_chart">
+            <p>Семейное положение</p>
+            <mdb-pie-chart class="line_chart" datalabels :data="pieChartData" :options="pieChartOptions" :width="600" :height="300" />
         </div>
 
     </div>
@@ -13,9 +18,7 @@
 </template>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="jquery.maskedinput.js" type="text/javascript"></script>
-
-<script  lang="ts">
+<script src="jquery.maskedinput.js" type="text/javascript"></script><script lang="ts">
 // import {mdbLineChart,  mdbContainer} from "mdbvue";
 // export default {
 //     name: "ChartPage",
@@ -79,58 +82,61 @@
 //         };
 //     }
 // };
-// </script>
-
-// <script>
-import {    Component,    Vue} from "vue-property-decorator";
+// 
+</script><script>
+// 
+import {
+    Component,
+    Vue
+} from "vue-property-decorator";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {    mdbBarChart,    mdbContainer} from "mdbvue";
-
+import {
+    mdbBarChart,
+    mdbContainer,
+    mdbPieChart,
+} from "mdbvue";
 
 @Component({
     components: {
         mdbBarChart,
-        mdbContainer},
+        mdbContainer,
+        mdbPieChart
+    },
 })
 export default class Home extends Vue {
-    amount_of_children_mass = [12, 19, 3, 5, 2]
-
     data() {
         return {
             ADMIN: false,
-            amount_of_children_mass: [12, 19, 3, 5, 2],
 
-            barChartData: {
-                labels: [
-                    "0",
-                    "1",
-                    "2",
-                    "3",
-                    "более 3"
-                ],
-                datasets: [{
-                    label: "Количество детей",
-                    data:  this.amount_of_children_mass,                  
-                    
-                    backgroundColor: [
-                        "rgba(255, 99, 132, 0.2)",
-                        "rgba(54, 162, 235, 0.2)",
-                        "rgba(255, 206, 86, 0.2)",
-                        "rgba(75, 192, 192, 0.2)",
-                        "rgba(153, 102, 255, 0.2)",
-                        // "rgba(255, 159, 64, 0.2)"
-                    ],
-                    borderColor: [
-                        "rgba(255,99,132,1)",
-                        "rgba(54, 162, 235, 1)",
-                        "rgba(255, 206, 86, 1)",
-                        "rgba(75, 192, 192, 1)",
-                        "rgba(153, 102, 255, 1)",
-                        // "rgba(255, 159, 64, 1)"
-                    ],
-                    borderWidth: 1
-                }]
-            },
+            barChartData: this.datacollection,
+
+            // barChartData: {
+            //     labels: [ "0", "1", "2", "3", "более 3" ],
+            //     datasets: [{
+            //         label: "Количество детей",
+            //         data: [12, 19, 3, 5, 2],
+
+            //         backgroundColor: [
+            //             "rgba(255, 99, 132, 0.2)",
+            //             "rgba(54, 162, 235, 0.2)",
+            //             "rgba(255, 206, 86, 0.2)",
+            //             "rgba(75, 192, 192, 0.2)",
+            //             "rgba(153, 102, 255, 0.2)",
+            //             // "rgba(255, 159, 64, 0.2)"
+            //         ],
+
+            //         borderColor: [
+            //             "rgba(255,99,132,1)",
+            //             "rgba(54, 162, 235, 1)",
+            //             "rgba(255, 206, 86, 1)",
+            //             "rgba(75, 192, 192, 1)",
+            //             "rgba(153, 102, 255, 1)",
+            //             // "rgba(255, 159, 64, 1)"
+            //         ],
+
+            //         borderWidth: 1
+            //     }]
+            // },
 
             barChartOptions: {
                 responsive: false,
@@ -150,91 +156,111 @@ export default class Home extends Vue {
                         }
                     }]
                 }
+            },
+
+            pieChartData: {
+          labels: ["Жен/ЗМ", "Хол/НЗ", "Разв.", "Вдов."],
+          datasets: [
+            {
+              data: [300, 50, 100, 40],
+              backgroundColor: [
+                "#F7464A",
+                "#46BFBD",
+                "#FDB45C",
+                "#949FB1"
+              ],
+              hoverBackgroundColor: [
+                "#FF5A5E",
+                "#5AD3D1",
+                "#FFC870",
+                "#A8B3C5"
+              ]
             }
+          ]
+            },
+
+            pieChartOptions: {
+          responsive: false,
+          maintainAspectRatio: false,
+          plugins: {
+            datalabels: {
+              color: "white",
+              align: "center",
+              font: {
+                size: 16
+              },
+              formatter: value => {
+                const [dataset] = this.pieChartData.datasets;
+                const setValue = dataset.data.reduce((a, b) => a + b);
+
+                return `${Math.round((value / setValue) * 100)}%`;
+              }
+            }
+          }
+        },
+
+
         };
     }
 
-
-    // data() {
-    //     return {
-    //         ADMIN: false,            
-    //     }
-    // }
-
-    token = "";
     
 
     async mounted() {
-        const amount_of_children_mass2 = [12, 19, 3, 5, 2]
         this.token = localStorage.token;
-        this.amount_of_children_mass = [12, 19, 3, 5, 2]
+
+        this.GetData()
+        console.log(this.datacollection)
     }
+
+    datacollection = {}
+    
+
+    async GetData() {
+        console.log("qwert")
+
+        this.amount_of_children_mass = [12, 19, 3, 5, 4]
+        this.columnNames = [ "0", "1", "2", "3", "более 3" ]
+        this.ADMIN = true
+           
+
+        this.datacollection = {
+              labels: this.columnNames,
+              datasets: [
+                {
+                  label: "Количество детей",
+                  data: this.amount_of_children_mass,
+                  backgroundColor: [
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(255, 206, 86, 0.2)",
+                        "rgba(75, 192, 192, 0.2)",
+                        "rgba(153, 102, 255, 0.2)",
+                        // "rgba(255, 159, 64, 0.2)"
+                    ],
+
+                    borderColor: [
+                        "rgba(255,99,132,1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(255, 206, 86, 1)",
+                        "rgba(75, 192, 192, 1)",
+                        "rgba(153, 102, 255, 1)",
+                        // "rgba(255, 159, 64, 1)"
+                    ],
+
+                    borderWidth: 1
+                },
+              ]
+            }
+
+            console.log(this.datacollection)
+            this.barChartData = this.datacollection
+
+
+          }
+
+          
+    
 
 }
 
-// export default {
-//     name: "ChartPage",
-//     components: {
-//         mdbBarChart,
-//         mdbContainer
-//     },
-
-//     amount_of_children_mass: [12, 19, 3, 5, 2],
-   
-//     data() {
-//         return {
-//             barChartData: {
-//                 labels: [
-//                     "0",
-//                     "1",
-//                     "2",
-//                     "3",
-//                     "более 3"
-//                 ],
-//                 datasets: [{
-//                     label: "Количество детей",
-//                     data: [12, 19, 3, 5, 7],                  
-                    
-//                     backgroundColor: [
-//                         "rgba(255, 99, 132, 0.2)",
-//                         "rgba(54, 162, 235, 0.2)",
-//                         "rgba(255, 206, 86, 0.2)",
-//                         "rgba(75, 192, 192, 0.2)",
-//                         "rgba(153, 102, 255, 0.2)",
-//                         // "rgba(255, 159, 64, 0.2)"
-//                     ],
-//                     borderColor: [
-//                         "rgba(255,99,132,1)",
-//                         "rgba(54, 162, 235, 1)",
-//                         "rgba(255, 206, 86, 1)",
-//                         "rgba(75, 192, 192, 1)",
-//                         "rgba(153, 102, 255, 1)",
-//                         // "rgba(255, 159, 64, 1)"
-//                     ],
-//                     borderWidth: 1
-//                 }]
-//             },
-//             barChartOptions: {
-//                 responsive: false,
-//                 maintainAspectRatio: false,
-//                 scales: {
-//                     xAxes: [{
-//                         barPercentage: 1,
-//                         gridLines: {
-//                             display: true,
-//                             color: "rgba(0, 0, 0, 0.1)"
-//                         }
-//                     }],
-//                     yAxes: [{
-//                         gridLines: {
-//                             display: true,
-//                             color: "rgba(0, 0, 0, 0.1)"
-//                         }
-//                     }]
-//                 }
-//             }
-//         };
-//     },
-
-// };
 </script>

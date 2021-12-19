@@ -3,22 +3,21 @@
 
     <div class="news">
 
+
         <!-- <div v-show="Block_news_TRUE"> -->
 
-        <div v-for="neew in news.slice().reverse()" :key="neew.id">
-
-            <div class="block_news color_DB">
-                <h4 class="h4_new">{{neew.Head}}</h4>
-                <hr class="HR_news">
-                <p class="block_news_P">{{neew.info}}</p>
-                <hr class="HR_news">
-                <p class="data_news">{{ new Date(neew.createdAt).toLocaleString() }}</p>
-
-                <p v-show="ADMIN"><button class="osnovnButton" @click="get_id_new(neew.id)">Удалить </button></p>
-            </div>
-
-            <hr class="hrSt color_LB">
-        </div>
+        <div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+  <label class="form-check-label" for="inlineRadio1">1</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked>
+  <label class="form-check-label" for="inlineRadio2">2</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+  <label class="form-check-label" for="inlineRadio3">3</label>
+</div>
 
         
 

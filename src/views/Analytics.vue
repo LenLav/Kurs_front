@@ -1,10 +1,10 @@
 <template>
 <body>
     <div class="analytics">
-        
+
         <div class="container_chart">
             <!-- <mdb-container> -->
-            <mdb-bar-chart class="line_chart" :data="barChartData" :options="barChartOptions" :width="600" :height="300"></mdb-bar-chart>
+            <mdb-bar-chart class="line_chart" :data="barChartData_child" :options="barChartOptions" :width="600" :height="300"></mdb-bar-chart>
             <!-- </mdb-container> -->
         </div>
 
@@ -108,7 +108,7 @@ export default class Home extends Vue {
         return {
             ADMIN: false,
 
-            barChartData: this.datacollection,
+            barChartData_child: this.datacollection_children,
 
             // barChartData: {
             //     labels: [ "0", "1", "2", "3", "более 3" ],
@@ -209,26 +209,23 @@ export default class Home extends Vue {
         this.token = localStorage.token;
 
         this.GetData()
-        console.log(this.datacollection)
+        console.log(this.datacollection_children)
     }
 
-    datacollection = {}
+    datacollection_children = {}
     
 
     async GetData() {
-        console.log("qwert")
-
-        this.amount_of_children_mass = [12, 19, 3, 5, 4]
-        this.columnNames = [ "0", "1", "2", "3", "более 3" ]
-        this.ADMIN = true
+        this.children_mass = [12, 19, 3, 5, 4]
+        this.columnNames_children = [ "0", "1", "2", "3", "более 3" ]
            
 
-        this.datacollection = {
-              labels: this.columnNames,
+        this.datacollection_children = {
+              labels: this.columnNames_children,
               datasets: [
                 {
                   label: "Количество детей",
-                  data: this.amount_of_children_mass,
+                  data: this.children_mass,
                   backgroundColor: [
                         "rgba(255, 99, 132, 0.2)",
                         "rgba(54, 162, 235, 0.2)",
@@ -252,8 +249,8 @@ export default class Home extends Vue {
               ]
             }
 
-            console.log(this.datacollection)
-            this.barChartData = this.datacollection
+        console.log(this.datacollection_children)
+        this.barChartData_child = this.datacollection_children
 
 
           }

@@ -22,7 +22,7 @@
             
 
             <p class="Profil_info_blok">Основная информация</p>
-            <hr class="Profil_info_Hr" style="margin-top: -20px;">
+            <hr class="Profil_info_Hr">
 
             <table class="TableCheck">
                 <tr>
@@ -53,7 +53,7 @@
             </div>
 
             <p class="Profil_info_blok">Дополнительная информация</p>
-            <hr class="Profil_info_Hr" style="margin-top: -20px;">
+            <hr class="Profil_info_Hr">
 
             <table class="TableCheck">
                 <tr>

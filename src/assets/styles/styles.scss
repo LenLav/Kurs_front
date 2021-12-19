@@ -95,10 +95,12 @@ h5{
 }
 
 .Profil_info_Hr {
-    margin-top: -20px;
+    margin-top: 0;
+    margin-bottom: 0;
     margin-left: 40px;
     width: 80%;
     color: #4b5a75;
+    border-top: 1px solid #4b5a75;
 }
 
 
@@ -119,6 +121,7 @@ h5{
     font-size: 14px;
     text-align: left;
     margin-left: 40px;
+    margin-bottom: 0;
 }
 
 .card {
@@ -172,6 +175,7 @@ h5{
     color: $DarckBlue;
     border: none;
     font-size: 14px;
+    vertical-align: bottom;
 }
 
 .Input_fio_edit_profil{

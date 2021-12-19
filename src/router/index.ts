@@ -73,6 +73,14 @@ const routes: Array<RouteConfig> = [
     component: () =>
       import( "../views/Tekhpodderzhka.vue"),
   },
+  {
+    path: "/analytics",
+    name: "Analytics",
+    component: () =>
+      import( "../views/Analytics.vue"),
+  },
+
+  
 
 
 ];

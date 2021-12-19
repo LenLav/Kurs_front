@@ -52,8 +52,9 @@ h5{
 .profil,
 .registration,
 .news,
-.tekhpodderzhka {    
-    // border: 1px solid orange;
+.tekhpodderzhka,
+.analytics {    
+    //  border: 1px solid rgb(0, 217, 255);
     width: 83%;
     margin-right: auto;
      margin-left: 17%;
@@ -484,5 +485,18 @@ box-shadow: 4px 4px 32px 1000px rgba(0, 0, 0, 0.7);
     height: 150px;
     font-size: 15px;    
     color: rgb(16, 16, 17);
+}
+
+.container_chart{
+    border: 1px solid orange;
+    align-items: center;
+}
+
+.line_chart{
+    border: 1px solid rgb(252, 101, 244);
+    // margin: 0 auto 0 auto ;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(255, 255, 255);
 }
 

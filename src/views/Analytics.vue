@@ -29,7 +29,7 @@
 
         <div class="container_chart">
             <p>Семейное положение</p>
-            <mdb-pie-chart class="line_chart" datalabels :data="pieChartData_marital" :options="pieChartOptions_marital" :width="600" :height="300" />
+            <mdb-pie-chart class="line_chart" datalabels :data="pieChartData_marital" :options="pieChartOptions_marital" :width="300" :height="300" />
         </div>
 
         <div class="container_chart">
@@ -37,8 +37,6 @@
             <mdb-bar-chart class="line_chart" :data="barChartData_child" :options="barChartOptions_child" :width="600" :height="300"></mdb-bar-chart>
             <!-- </mdb-container> -->
         </div>
-
-        
 
     </div>
 </body>
@@ -223,7 +221,7 @@ export default class Home extends Vue {
         this.datacollection_salary = {
             labels: this.columnNames_salary,
             datasets: [{
-                label: "Количество детей",
+                label: "Заработная плата",
                 data: this.salary_mass,
                 backgroundColor: [
                     "rgba(255, 99, 132, 0.2)",

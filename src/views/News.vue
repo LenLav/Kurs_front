@@ -2,21 +2,17 @@
 <body>
 
     <div v-show="ADMIN" class="push" @click="add_new()">
-        <div class="push_content">
             <div class="push_content_news">
                 <i class="bi bi-plus-circle" style="padding-right: 10px;"></i>
                 <span>Добавить новость</span>
             </div>
-        </div>
     </div>
 
     <div v-show="Push_add_new" class="push">
-        <div class="push_content">
             <div class="push_content_true">
                 <span>{{info_push}}</span>
                 <i class="bi bi-x-circle" style="padding-left: 10px;" @click="ADMIN = !ADMIN"></i>
             </div>
-        </div>
     </div>
 
     <div v-show="question_TRUE" class="add_news">

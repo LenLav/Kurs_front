@@ -28,7 +28,7 @@
                 <img class="card-photo" src="../img/Profil3.jpg" alt="Фото пользователя">
             </div>
             <h5 style="color: black; padding-bottom: 20px;">{{FIO}}
-                <i v-show="ADMIN" class="bi bi-check-circle" style="color: green;" data-bs-toggle="tooltip" title="Администратор"></i>
+                <i v-show="ADMIN" class="bi bi-check-circle-fill" style="color: green;" data-bs-toggle="tooltip" title="Администратор"></i>
             </h5>
             
 

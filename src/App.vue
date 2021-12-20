@@ -41,7 +41,7 @@
                       class="bi bi-person"
                       style="font-size: 1.9rem; color: grey"
                     ></i
-                    >{{ FiO }}</a>
+                    >{{ FiO }}<i v-show="ADMIN" class="bi bi-check-circle" style="color: green; padding-left: 5px;" data-bs-toggle="tooltip" title="Администратор"></i></a>
                 </li>
               </div>
 
@@ -130,6 +130,7 @@ export default class Home extends Vue {
   data() {
     return {
       fio: "",
+      ADMIN: false
     };
   }
 
@@ -139,6 +140,7 @@ export default class Home extends Vue {
   token = "";
   FIO = "";
   FiO = "";
+  ADMIN = false
 
   async mounted() {
     this.token = localStorage.token;
@@ -146,6 +148,11 @@ export default class Home extends Vue {
 
     this.token = localStorage.token;
     const result = await this.$store.dispatch("me_inform");
+
+    if (result.isAdmin === true) {
+            this.ADMIN = true
+        }
+
     this.FIO = result.fio;
     var poi = this.FIO.split(" ");
     this.FiO = poi[0] + " " + poi[1][0] + "." + poi[2][0] + ".";

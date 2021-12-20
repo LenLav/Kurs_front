@@ -23,14 +23,22 @@
 
         <div class="container_chart">
             <!-- <mdb-container> -->
-            <mdb-bar-chart class="line_chart" :data="barChartData_child" :options="barChartOptions" :width="600" :height="300"></mdb-bar-chart>
+            <mdb-bar-chart class="line_chart" :data="barChartData_salary" :options="barChartOptions_salary" :width="600" :height="300"></mdb-bar-chart>
             <!-- </mdb-container> -->
         </div>
 
         <div class="container_chart">
             <p>Семейное положение</p>
-            <mdb-pie-chart class="line_chart" datalabels :data="pieChartData" :options="pieChartOptions" :width="600" :height="300" />
+            <mdb-pie-chart class="line_chart" datalabels :data="pieChartData_marital" :options="pieChartOptions_marital" :width="600" :height="300" />
         </div>
+
+        <div class="container_chart">
+            <!-- <mdb-container> -->
+            <mdb-bar-chart class="line_chart" :data="barChartData_child" :options="barChartOptions_child" :width="600" :height="300"></mdb-bar-chart>
+            <!-- </mdb-container> -->
+        </div>
+
+        
 
     </div>
 </body>
@@ -127,10 +135,9 @@ export default class Home extends Vue {
         return {
             ADMIN: false,
 
-            barChartData_child: this.datacollection_children,
+            barChartData_salary: this.datacollection_salary,
 
-           
-            barChartOptions: {
+            barChartOptions_salary: {
                 responsive: false,
                 maintainAspectRatio: false,
                 scales: {
@@ -150,28 +157,31 @@ export default class Home extends Vue {
                 }
             },
 
-            pieChartData: this.datacollection_marital,
+            barChartData_child: this.datacollection_children,
 
-            // pieChartData: {
-            //     labels: ["Жен/ЗМ", "Хол/НЗ", "Разв.", "Вдов."],
-            //     datasets: [{
-            //         data: [300, 50, 100, 40],
-            //         backgroundColor: [
-            //             "#F7464A",
-            //             "#46BFBD",
-            //             "#FDB45C",
-            //             "#949FB1"
-            //         ],
-            //         hoverBackgroundColor: [
-            //             "#FF5A5E",
-            //             "#5AD3D1",
-            //             "#FFC870",
-            //             "#A8B3C5"
-            //         ]
-            //     }]
-            // },
+            barChartOptions_child: {
+                responsive: false,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        barPercentage: 1,
+                        gridLines: {
+                            display: true,
+                            color: "rgba(0, 0, 0, 0.1)"
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            display: true,
+                            color: "rgba(0, 0, 0, 0.1)"
+                        }
+                    }]
+                }
+            },
 
-            pieChartOptions: {
+            pieChartData_marital: this.datacollection_marital,
+
+            pieChartOptions_marital: {
                 responsive: false,
                 maintainAspectRatio: false,
                 plugins: {
@@ -182,7 +192,7 @@ export default class Home extends Vue {
                             size: 16
                         },
                         formatter: value => {
-                            const [dataset] = this.pieChartData.datasets;
+                            const [dataset] = this.pieChartData_marital.datasets;
                             const setValue = dataset.data.reduce((a, b) => a + b);
 
                             return `${Math.round((value / setValue) * 100)}%`;
@@ -203,8 +213,48 @@ export default class Home extends Vue {
         this.check_quarter()
     }
 
+    datacollection_salary = {}
     datacollection_children = {}
     datacollection_marital = {}
+
+    async GetDataSalary() {
+        this.columnNames_salary = ["менее 20", "20-40", "40-60", "60-80", "80-100", "100-120", "120-150", "более 150"]
+
+        this.datacollection_salary = {
+            labels: this.columnNames_salary,
+            datasets: [{
+                label: "Количество детей",
+                data: this.salary_mass,
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(255, 159, 64, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                ],
+
+                borderColor: [
+                    "rgba(255,99,132,1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)",
+                    "rgba(255, 159, 64, 1)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                ],
+
+                borderWidth: 1
+            }, ]
+        }
+
+        console.log(this.datacollection_salary)
+        this.barChartData_salary = this.datacollection_salary
+
+    }
 
     async GetDataChild() {
         this.columnNames_children = ["0", "1", "2", "3", "более 3"]
@@ -247,58 +297,66 @@ export default class Home extends Vue {
         this.datacollection_marital = {
             labels: this.columnNames_marital,
             datasets: [{
-                    data: this.marital_mass,
-                    backgroundColor: [
-                        "#F7464A",
-                        "#46BFBD",
-                        "#FDB45C",
-                        "#949FB1"
-                    ],
-                    hoverBackgroundColor: [
-                        "#FF5A5E",
-                        "#5AD3D1",
-                        "#FFC870",
-                        "#A8B3C5"
-                    ]
-                }]
+                data: this.marital_mass,
+                backgroundColor: [
+                    "#F7464A",
+                    "#46BFBD",
+                    "#FDB45C",
+                    "#949FB1"
+                ],
+                hoverBackgroundColor: [
+                    "#FF5A5E",
+                    "#5AD3D1",
+                    "#FFC870",
+                    "#A8B3C5"
+                ]
+            }]
         }
 
         console.log(this.datacollection_marital)
-        this.pieChartData = this.datacollection_marital
+        this.pieChartData_marital = this.datacollection_marital
     }
 
     check_month() {
         console.log("check_month")
+        this.salary_mass = [5, 7, 15, 3, 4, 15, 3, 4]
         this.children_mass = [5, 7, 15, 3, 4]
         this.marital_mass = [12, 7, 3, 0]
 
+        this.GetDataSalary()
         this.GetDataChild()
         this.GetDataMarital()
     }
 
     check_quarter() {
         console.log("check_quarter")
+        this.salary_mass = [5, 7, 15, 3, 4, 15, 3, 4]
         this.children_mass = [9, 17, 33, 7, 5]
         this.marital_mass = [30, 15, 10, 1]
 
+        this.GetDataSalary()
         this.GetDataChild()
         this.GetDataMarital()
     }
 
     check_half_year() {
         console.log("check_half_year")
+        this.salary_mass = [5, 7, 15, 3, 4, 15, 3, 4]
         this.children_mass = [15, 27, 43, 12, 7]
         this.marital_mass = [47, 22, 12, 3]
 
+        this.GetDataSalary()
         this.GetDataChild()
         this.GetDataMarital()
     }
 
     check_year() {
         console.log("check_year")
+        this.salary_mass = [5, 7, 15, 3, 4, 15, 3, 4]
         this.children_mass = [33, 58, 89, 20, 12]
         this.marital_mass = [80, 69, 46, 12]
 
+        this.GetDataSalary()
         this.GetDataChild()
         this.GetDataMarital()
     }

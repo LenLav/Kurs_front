@@ -42,7 +42,7 @@
             <p><input v-model="form.fio" class="inpStyle" placeholder="Фамилия Имя Отчество"> <br></p>
             <p><input v-model="form.pasport" type="text" class="inpStyle mask-pasport" id="pasport" placeholder="Паспорт: (серия, номер)"> <br></p>
             <p><input v-model="form.email" class="inpStyle" placeholder="Email"> <br></p>
-            <p><input v-model="form.password" class="inpStyle" placeholder="Пароль"> <br></p>
+            <p><input maxlength="20" minlength="6" v-model="form.password" class="inpStyle" placeholder="Пароль (от 6 до 20 символов)"> <br></p>
 
             <!-- <form action="profil" style="padding-bottom: 20px;">
             <button type="submit" class="btn btn-outline-success">Зарегистрироваться</button>
@@ -94,30 +94,54 @@ export default class Home extends Vue {
     info_push = ""
     color_push = ""
 
+    async Error_push(info: string) {
+        this.OK_FALSE = true
+        this.info_push = info
+
+        let vm = this;
+        setTimeout(function () {
+            vm.OK_FALSE = false
+        }, 4000);
+    }
+
     async registr() {
-        const result = await this.$store.dispatch("registration", this.form);
-        this.token = result.token;
+        let vm = this;
+        await this.$store.dispatch("registration", this.form)
+            .then(result => {
+                this.token = result.token;
+                if (result.success === true) {
+                    this.OK_TRUE = true
+                    this.info_push = result.message
 
-        if (result.success === true) {
-            this.OK_TRUE = true
-            this.info_push = result.message
+                    setTimeout(function () {
+                        window.location.href = 'profil'
+                    }, 1000);
+                } else {
+                    this.OK_FALSE = true
+                    this.info_push = result.message
 
-            setTimeout(function () {
-                window.location.href = 'profil'
-            }, 1000);            
-        } 
-        else {
-            this.OK_FALSE = true
-            this.info_push = result.message
+                    let vm = this;
+                    setTimeout(function () {
+                        vm.OK_FALSE = false
+                    }, 4000);
+                }
 
-            let vm = this;
-            setTimeout(function () {
-                vm.OK_FALSE = false
-            }, 4000);
-        }
+                console.log(result)
+                console.log(result.success)
 
-        console.log(result)
-        console.log(result.success)
+                return result;
+            })
+            .catch(function (error) {
+                let s = vm;
+                if (error.response.status === 500) {
+                    s.Error_push("Данный email уже успользуется")
+                }
+                if (error.response.status === 400) {
+                    s.Error_push("Неверная длина пароля")
+                }
+                console.log(error.response.status); // getting here
+                return error;
+            });
 
     }
 

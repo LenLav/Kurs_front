@@ -44,70 +44,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="jquery.maskedinput.js" type="text/javascript"></script><script lang="ts">
-// import {mdbLineChart,  mdbContainer} from "mdbvue";
-// export default {
-//     name: "ChartPage",
-//     components: {
-//         mdbLineChart,
-//         mdbContainer
-//     },
-//     data() {
-//         return {
-//             lineChartData: {
-//                 labels: [
-//                     "January",
-//                     "February",
-//                     "March",
-//                     "April",
-//                     "May",
-//                     "June",
-//                     "July"
-//                 ],
-//                 datasets: [{
-//                         label: "Количество уволенных",
-//                         backgroundColor: "rgba(155, 199, 32, 0.1)",
-//                         borderColor: "rgba(155, 199, 32, 1)",
-//                         borderWidth: 0.7,
-//                         data: [5, 10, 4, 27, 56, 45, 34]
-//                     },
-//                     {
-//                         label: "Количество новых сотрудников",
-//                         backgroundColor: "rgba(255, 99, 132, 0.2)",
-//                         borderColor: "rgba(255, 99, 132, 1)",
-//                         borderWidth: 0.7,
-//                         data: [65, 59, 80, 81, 56, 55, 40]
-//                     },
-//                     // {
-//                     //     label: "My Second dataset",
-//                     //     backgroundColor: "rgba(151,187,205,0.2)",
-//                     //     borderColor: "rgba(151,187,205,1)",
-//                     //     borderWidth: 0.8,
-//                     //     data: [28, 48, 40, 19, 86, 27, 90]
-//                     // }
-//                 ]
-//             },
-//             lineChartOptions: {
-//                 responsive: false,
-//                 maintainAspectRatio: false,
-//                 scales: {
-//                     xAxes: [{
-//                         gridLines: {
-//                             display: true,
-//                             color: "rgba(0, 0, 0, 0.1)"
-//                         }
-//                     }],
-//                     yAxes: [{
-//                         gridLines: {
-//                             display: true,
-//                             color: "rgba(0, 0, 0, 0.1)"
-//                         }
-//                     }]
-//                 }
-//             }
-//         };
-//     }
-// };
-// 
+
 </script><script>
 // 
 import {
@@ -187,7 +124,7 @@ export default class Home extends Vue {
                         color: "white",
                         align: "center",
                         font: {
-                            size: 16
+                            size: 14
                         },
                         formatter: value => {
                             const [dataset] = this.pieChartData_marital.datasets;
@@ -230,8 +167,8 @@ export default class Home extends Vue {
                     "rgba(75, 192, 192, 0.2)",
                     "rgba(153, 102, 255, 0.2)",
                     "rgba(255, 159, 64, 0.2)",
-                    "rgba(54, 162, 235, 0.2)",
-                    "rgba(255, 206, 86, 0.2)",
+                    "rgba(149, 204, 22, 0.2)",
+                    "rgba(204, 22, 174, 0.2)",
                 ],
 
                 borderColor: [
@@ -241,8 +178,8 @@ export default class Home extends Vue {
                     "rgba(75, 192, 192, 1)",
                     "rgba(153, 102, 255, 1)",
                     "rgba(255, 159, 64, 1)",
-                    "rgba(54, 162, 235, 0.2)",
-                    "rgba(255, 206, 86, 0.2)",
+                    "rgba(149, 204, 22, 1)",
+                    "rgba(204, 22, 174, 1)",
                 ],
 
                 borderWidth: 1

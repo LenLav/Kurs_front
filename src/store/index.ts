@@ -86,6 +86,16 @@ export default new Vuex.Store({
       return data;
     },
 
+    async create_person({ state, commit, rootState }, params) {
+      const { data } = await instance.post("/users/create", params);
+      return data;
+    },
+
+    async edit_pass({ state, commit, rootState }, params) {
+      const { data } = await instance.put("/users/update", params);
+      return data;
+    },
+
     // async messageCreate({ state }, params) {
     //   const { data } = await instance.post("/message/create", params);
     //   return data;

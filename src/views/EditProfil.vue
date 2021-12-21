@@ -16,7 +16,7 @@
 
             <div class="formaPolzovatelya">
                 <div style="padding:  3% 0% 3% 0%;">
-                    <img class="card-photo" src="../img/Profil3.jpg" alt="Фото пользователя">
+                    <img class="card-photo" src="../img/Profil.jpg" alt="Фото пользователя">
                 </div>
                 <h5 style="color: black; padding-bottom: 20px;">{{FIO}}
                     <i v-show="ADMIN" class="bi bi-check-circle" style="color: green;" data-bs-toggle="tooltip" title="Администратор"></i>
@@ -92,6 +92,7 @@
                 <!-- <p style="padding-bottom: 20px;"><button type="button" class="btn btn-outline-success" @click="edit()">Удалить профиль</button> <br></p> -->
 
             </div>
+            
         </div>
     </div>
 </body>

@@ -336,8 +336,7 @@ table.text  {
     position: fixed;
     top: 80px;
     right: 16px;
-    z-index: 10;
-
+    z-index: 1000;
 }
 
 .add_news{
@@ -462,6 +461,7 @@ box-shadow: 4px 4px 32px 1000px rgba(0, 0, 0, 0.7);
     color: red;
     margin-bottom: 0;
     margin-right: 20px;
+    cursor: default;
 
     &:hover {
         text-decoration-line: underline;
@@ -573,3 +573,5 @@ canvas{
     align-items: center;
     height: 50px;
 }
+
+

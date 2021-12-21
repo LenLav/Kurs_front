@@ -39,41 +39,6 @@
         <form action="registration" style="padding-bottom: 20px;">
             <button type="submit" class="osnovnButton">Зарегистрироваться</button>
         </form>
-
-
-
-<!-- <div v-if="!token">
-      Вход в систему
-      <input
-        placeholder="Email"
-        class="form-control"
-        v-model="form.email"
-      /><br />
-      <input
-        placeholder="Пароль"
-        class="form-control"
-        v-model="form.password"
-      />
-      <button class="btn btn-primary form-control" @click="login()">
-        Вход
-      </button>
-    </div>
-
-    <div v-else class="card">
-      <button class="btn btn-outline-primary form-control" @click="logout()">
-        Выход
-      </button>
-      <div class="card-header">accessToken</div>
-      <div class="card-body font-xs">
-        {{ token }}
-      </div>
-      <button class="btn btn-sm btn-success form-control" @click="userList()">
-        Обновить список пользователей
-      </button>
-      
-    </div> -->
-
-
     </div>
     </div>
 </body>

@@ -58,6 +58,21 @@
     </div>
 
     <div class="LeftNavbar">
+        <div v-if="!token">
+            <p style="padding-top: 25px">Дла получения более полной информации необходимо авторизоваться</p>
+            <form action="login">
+                <button type="submit" class="LeftNavbarButton">
+                    <i class="bi bi-box-arrow-in-right" style="padding-right: 5%"></i>
+                    Войти
+                </button>
+            </form>
+            <form action="registration">
+                <button type="submit" class="LeftNavbarButton">
+                    <i class="bi bi-person-plus" style="padding-right: 5%"></i>
+                    Регистрация
+                </button>
+            </form>
+        </div>
         <div v-if="token">
             <form action="news">
                 <button type="submit" class="LeftNavbarButton">
@@ -81,16 +96,16 @@
             </form>
 
             <!-- <form > -->
-                <button type="submit" class="LeftNavbarButton" @click="show_error_page()">
-                    <i class="bi bi-envelope-check" style="padding-right: 5%;"></i>
-                    Мессенджер</button>
+            <button type="submit" class="LeftNavbarButton" @click="show_error_page()">
+                <i class="bi bi-envelope-check" style="padding-right: 5%;"></i>
+                Мессенджер</button>
             <!-- </form> -->
 
             <!-- <form > -->
-                <button type="submit" class="LeftNavbarButton" @click="show_error_page()">
-                    <i class="bi bi-calendar3" style="padding-right: 5%"></i>
-                    Календарь
-                </button>
+            <button type="submit" class="LeftNavbarButton" @click="show_error_page()">
+                <i class="bi bi-calendar3" style="padding-right: 5%"></i>
+                Календарь
+            </button>
             <!-- </form> -->
 
             <form action="tekhpodderzhka">

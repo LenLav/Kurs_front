@@ -1,7 +1,7 @@
 <template>
 <body>
 
-    <div v-show="ADMIN" class="push" @click="add_new()">
+    <div v-show="ADMIN" class="push" style=" z-index: 10;" @click="add_news_TRUE = true">
             <div class="push_content_news">
                 <i class="bi bi-plus-circle" style="padding-right: 10px;"></i>
                 <span>Добавить новость</span>
@@ -162,11 +162,6 @@ export default class Home extends Vue {
 
     }
 
-    async add_new() {
-        this.add_news_TRUE = true
-               
-    }
-
     async save_new() {
         const result = await this.$store.dispatch("create_new", this.form);
         console.log(result)
@@ -189,19 +184,6 @@ export default class Home extends Vue {
     async get_id_new(id: any) {
       this.question_TRUE = !this.question_TRUE
       this.ID_new = id
-
-        // this.token = localStorage.token;
-
-        // const result = await this.$store.dispatch("delete_new", id);
-        // this.Push_add_new = "true"
-        // this.info_push = "Новость успешно удалена"
-
-        // let vm = this;
-        // setTimeout(function () {
-        //     vm.Push_add_new = "false"
-        //     window.location.reload();
-        // }, 2000);
-        // console.log(result)
     }
 
     async newDelete(){

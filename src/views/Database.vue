@@ -139,6 +139,7 @@
                         <td class="align-middle">{{ user.male }}</td>
                         <td class="align-middle">{{ user.job }}</td>
                         <td v-show="ADMIN" class="align-middle">{{ user.date_of_receipt }}</td>
+                        <!-- {{ new Date(user.date_of_dismissal).toLocaleString() }} -->
                         <td v-show="ADMIN" class="align-middle">{{ user.date_of_dismissal }}</td>
                         <td v-show="ADMIN" class="align-middle">{{ user.salary }}</td>
                         <td v-show="ADMIN" class="align-middle">{{ user.marital_status }}</td>

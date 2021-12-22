@@ -81,10 +81,10 @@ export default class Home extends Vue {
     }
 
     form = {
-        fio: "Кузнецов Семен Валерьевич",
-        pasport: "97 20 859220",
-        email: "leader@mail.ru",
-        password: "123456"
+        fio: "",
+        pasport: "",
+        email: "",
+        password: ""
     }
 
     response = "ожидание"

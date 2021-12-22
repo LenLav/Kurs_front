@@ -19,6 +19,10 @@
                 <input @click="check_year()" class="form-check-input" type="radio" name="inlineRadioOptions" id="year" value="option4">
                 <label class="form-check-label" for="inlineRadio3">год</label>
             </div>
+            <div class="form-check form-check-inline">
+                <input @click="check_all()" class="form-check-input" type="radio" name="inlineRadioOptions" id="all" value="option5">
+                <label class="form-check-label" for="inlineRadio3">всё время</label>
+            </div>
         </div>
 
         <div class="container_chart">
@@ -27,10 +31,23 @@
             <!-- </mdb-container> -->
         </div>
 
-        <div class="container_chart">
-            <p>Семейное положение</p>
-            <mdb-pie-chart class="line_chart" datalabels :data="pieChartData_marital" :options="pieChartOptions_marital" :width="300" :height="300" />
-        </div>
+        <table class="tabl_stat">
+            <tr>
+                <td class="TdLev_stat">
+                    <div style="background-color: rgb(255, 255, 255);">
+                        <p>Семейное положение</p>
+                        <mdb-pie-chart class="line_chart" datalabels :data="pieChartData_marital" :options="pieChartOptions_marital" :width="300" :height="300" />
+                    </div>
+                </td>
+
+                <td class="TdPrav_stat">
+                    <div style="background-color: rgb(255, 255, 255);">
+                        <p>Пол</p>
+                        <mdb-doughnut-chart :data="doughnutChartData" :options="doughnutChartOptions" :width="300" :height="300" />
+                    </div>
+                </td>
+            </tr>
+        </table>
 
         <div class="container_chart">
             <!-- <mdb-container> -->
@@ -56,13 +73,15 @@ import {
     mdbBarChart,
     mdbContainer,
     mdbPieChart,
+    mdbDoughnutChart,
 } from "mdbvue";
 
 @Component({
     components: {
         mdbBarChart,
         mdbContainer,
-        mdbPieChart
+        mdbPieChart,
+        mdbDoughnutChart,
     },
 })
 export default class Home extends Vue {
@@ -136,21 +155,123 @@ export default class Home extends Vue {
                 }
             },
 
+        doughnutChartData:    this.datacollection_male,
+
+        doughnutChartOptions: {
+          responsive: false,
+          maintainAspectRatio: false
+        },
+
         };
     }
 
     async mounted() {
         this.token = localStorage.token;
 
-        this.GetDataChild()
-        console.log(this.datacollection_children)
+        // this.GetDataChild()
+        // console.log(this.datacollection_children)
 
         this.check_quarter()
+    }
+
+    async check_month() {
+        console.log("check_month")
+        this.form_analitic.time = "месяц"
+        await this.GetAnalitic()
+
+        this.GetDataSalary()
+        this.GetDataChild()
+        this.GetDataMarital()
+        this.GetDataMale()
+    }
+
+    async check_quarter() {
+        console.log("check_quarter")
+        this.form_analitic.time = "квартал"
+        await this.GetAnalitic()
+
+        this.GetDataSalary()
+        this.GetDataChild()
+        this.GetDataMarital()
+        this.GetDataMale()
+    }
+
+    async check_half_year() {
+        console.log("check_half_year")
+        this.form_analitic.time = "полгода"
+        await this.GetAnalitic()
+
+        this.GetDataSalary()
+        this.GetDataChild()
+        this.GetDataMarital()
+        this.GetDataMale()
+    }
+
+    async check_year() {
+        console.log("check_year")
+        this.form_analitic.time = "год"
+        await this.GetAnalitic()
+
+        console.log(this.salary_mass)
+        console.log(this.children_mass)
+        console.log(this.marital_mass)
+
+        this.GetDataSalary()
+        this.GetDataChild()
+        this.GetDataMarital()
+        this.GetDataMale()
+    }
+
+    async check_all() {
+        console.log("check_all")
+        this.form_analitic.time = "за все время"
+        await this.GetAnalitic()
+
+        this.GetDataSalary()
+        this.GetDataChild()
+        this.GetDataMarital()
+        this.GetDataMale()
+    }
+
+    form_analitic = {
+        time: ""
+    }
+
+    async GetAnalitic() {
+        await this.$store.dispatch("get_analitic", this.form_analitic)
+            .then(result => {
+                if (result.success === true) {
+
+                    this.salary_mass = [result.data[2].less_20, result.data[2].c20_40, result.data[2].c40_60, result.data[2].c60_80, result.data[2].c80_100, result.data[2].c100_120, result.data[2].c120_150, result.data[2].more_150]
+
+                    this.children_mass = [result.data[3].zero, result.data[3].one, result.data[3].two, result.data[3].three, result.data[3].more_three]
+
+                    this.marital_mass = [result.data[1].genzm, result.data[1].holnz, result.data[1].razv, result.data[1].vdov]
+
+                    this.male_mass = [result.data[0].g, result.data[0].m]
+
+                } else {
+
+                }
+
+                // console.log(this.form_analitic)
+                console.log(this.salary_mass)
+                console.log(this.children_mass)
+                console.log(this.marital_mass)
+                console.log(this.male_mass)
+                return result;
+            })
+            .catch(function (error) {
+                console.log(this.form_analitic)
+                console.log(error.response.status);
+                return error;
+            });
     }
 
     datacollection_salary = {}
     datacollection_children = {}
     datacollection_marital = {}
+    datacollection_male = {}
 
     async GetDataSalary() {
         this.columnNames_salary = ["менее 20", "20-40", "40-60", "60-80", "80-100", "100-120", "120-150", "более 150"]
@@ -252,48 +373,28 @@ export default class Home extends Vue {
         this.pieChartData_marital = this.datacollection_marital
     }
 
-    check_month() {
-        console.log("check_month")
-        this.salary_mass = [5, 7, 15, 3, 4, 15, 3, 4]
-        this.children_mass = [5, 7, 15, 3, 4]
-        this.marital_mass = [12, 7, 3, 0]
+    async GetDataMale() {
+        this.columnNames_male = ["женский", "мужской"]
 
-        this.GetDataSalary()
-        this.GetDataChild()
-        this.GetDataMarital()
-    }
+        this.datacollection_male = {
+          labels: this.columnNames_male,
+          datasets: [
+            {
+              data: this.male_mass,
+              backgroundColor: [
+                "#e9a85e",
+                "#8fe6c1",
+              ],
+              hoverBackgroundColor: [
+                "#e9a85e",
+                "#8fe6c1",
+              ]
+            }
+          ]
+        },
 
-    check_quarter() {
-        console.log("check_quarter")
-        this.salary_mass = [5, 7, 15, 3, 4, 15, 3, 4]
-        this.children_mass = [9, 17, 33, 7, 5]
-        this.marital_mass = [30, 15, 10, 1]
-
-        this.GetDataSalary()
-        this.GetDataChild()
-        this.GetDataMarital()
-    }
-
-    check_half_year() {
-        console.log("check_half_year")
-        this.salary_mass = [5, 7, 15, 3, 4, 15, 3, 4]
-        this.children_mass = [15, 27, 43, 12, 7]
-        this.marital_mass = [47, 22, 12, 3]
-
-        this.GetDataSalary()
-        this.GetDataChild()
-        this.GetDataMarital()
-    }
-
-    check_year() {
-        console.log("check_year")
-        this.salary_mass = [5, 7, 15, 3, 4, 15, 3, 4]
-        this.children_mass = [33, 58, 89, 20, 12]
-        this.marital_mass = [80, 69, 46, 12]
-
-        this.GetDataSalary()
-        this.GetDataChild()
-        this.GetDataMarital()
+        console.log(this.datacollection_male)
+        this.doughnutChartData = this.datacollection_male
     }
 
 }

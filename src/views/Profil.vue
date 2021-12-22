@@ -73,7 +73,7 @@
                 <a v-show="!edit_log" class="edit" @click="edit_log_TRUE = !edit_log_TRUE; edit_log = !edit_log;">Отмена</a>
             </div>
 
-            <div v-show="edit_log_TRUE">
+            <div v-show="!edit_log">
                 <hr class="Profil_info_Hr">
                 <table class="TableCheck">
                     <tr>
@@ -112,7 +112,7 @@
                 <a v-show="!edit_pass" class="edit" @click="edit_TRUE = !edit_TRUE; edit_pass = !edit_pass;">Отмена</a>
             </div>
 
-            <div v-show="edit_TRUE">
+            <div v-show="!edit_pass">
                 <hr class="Profil_info_Hr">
                 <table class="TableCheck">
                     <tr>
@@ -161,8 +161,6 @@ export default class Home extends Vue {
             OK_FALSE: false,
             ADMIN: false,
             LODIN_SHOW: true,
-            edit_TRUE: false,
-            edit_log_TRUE: false,
             edit_pass: true,
             edit_log: true,
             question_TRUE: false,
@@ -190,9 +188,12 @@ export default class Home extends Vue {
     question_TRUE = false
     info_push = ""
 
-    form = {
-        email: "",
+    form_pass = {
         password: ""
+    }
+
+    form_log = {
+        email: "",
     }
 
     new_login = ""
@@ -226,6 +227,8 @@ export default class Home extends Vue {
         this.SALARY = result.salary
         this.MARITAL_STATUS = result.marital_status
         this.PASPORT = result.pasport
+
+        this.new_login = this.EMAIL
 
         var poi = this.EMAIL.split("@");
         var log = poi[0][0] + poi[0][1]
@@ -277,22 +280,38 @@ export default class Home extends Vue {
         }, 4000);
     }
 
-    edit_TRUE = true
     edit_pass = true
+    edit_log = true
 
     async success_save() {
         this.old_password = ""
         this.new_password = ""
         this.new_password_2 = ""
-        this.edit_TRUE = !this.edit_TRUE;
-        this.edit_pass = !this.edit_pass;
+        this.new_login = ""
+        this.edit_pass = true;
+        this.edit_log = true;
     }
 
     async save_password() {
         if (this.new_password === this.new_password_2 && this.new_password !== '') {
-            this.form.email = this.EMAIL
-            this.form.password = this.new_password
-            this.save_pass_log();
+            this.form_pass.password = this.new_password
+            this.save_pass_log(this.form_pass);
+
+        } else {
+            this.OK_FALSE = true
+            this.info_push = "Пароли не совпадают"
+
+            let vm = this;
+            setTimeout(function () {
+                vm.OK_FALSE = false
+            }, 4000);
+        }
+    }
+
+    async save_log() {
+        if (this.new_login !== '') {
+            this.form_log.email = this.new_login
+            this.save_pass_log(this.form_log);
 
         } else {
             this.OK_FALSE = true
@@ -306,18 +325,19 @@ export default class Home extends Vue {
 
     }
 
-    async save_pass_log() {
+    async save_pass_log(edit_info: {}) {
         let vm = this;
-        await this.$store.dispatch("edit_pass", this.form)
+        await this.$store.dispatch("edit_pass", edit_info)
             .then(result => {
                 if (result.success === true) {
                     this.OK_TRUE = true
-                    this.info_push = "Пароль успешно изменен"
+                    this.info_push = "Изменения успешно внесены"
                     this.success_save();
 
                     setTimeout(function () {
                         vm.OK_TRUE = false
-                    }, 4000);
+                        window.location.reload();
+                    }, 2000);
                 } else {
                     this.OK_FALSE = true
                     this.info_push = result.message

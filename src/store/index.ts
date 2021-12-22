@@ -70,12 +70,6 @@ export default new Vuex.Store({
       return data;
     },
 
-    // async delete_profil({ state, commit, rootState }) {
-    //   const { data } = await instance.get("/users/logout");
-    //   commit("setToken", "");
-    //   return data;
-    // },
-
     async usersList({ state }, params) {
       const { data } = await instance.get("/users");
       return data;
@@ -93,6 +87,11 @@ export default new Vuex.Store({
 
     async edit_pass({ state, commit, rootState }, params) {
       const { data } = await instance.put("/users/update", params);
+      return data;
+    },
+
+    async get_analitic({ state, commit, rootState }, params) {
+      const { data } = await instance.post("/users/statistics", params);
       return data;
     },
 

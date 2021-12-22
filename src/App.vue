@@ -1,6 +1,17 @@
 <template>
 <body>
 
+    
+    <div v-show="OK_TRUE" class="push">
+        <div class="push_content">
+
+            <div id="text_push_id" class="push_content_true">
+                <span>{{info_push}}</span>
+                <i class="bi bi-x-circle" style="padding-left: 10px;" @click="OK_TRUE = !OK_TRUE"></i>
+            </div>
+        </div>
+    </div>
+
     <div v-show="page_TRUE" class="push_edit_page">
         <div class="push_content_page">
             <span style="margin: auto; text-align: center;">Эта страница находится в разработке</span>
@@ -138,7 +149,8 @@ export default class Home extends Vue {
         return {
             fio: "",
             ADMIN: false,
-            page_TRUE: false
+            page_TRUE: false,
+            OK_TRUE: false,
         };
     }
 
@@ -150,6 +162,8 @@ export default class Home extends Vue {
     FiO = "";
     ADMIN = false
     page_TRUE = false
+    OK_TRUE = false
+    info_push = ""
 
     async mounted() {
         this.token = localStorage.token;
@@ -170,7 +184,16 @@ export default class Home extends Vue {
     async logout() {
         const result = await this.$store.dispatch("logout");
         this.token = "";
-        window.location.href = "login";
+
+        if (result.success === true) {
+            this.OK_TRUE = true
+            this.info_push = result.message
+
+            setTimeout(function () {
+                window.location.href = 'login'
+            }, 1500);
+        }
+        
     }
 
     async show_error_page() {

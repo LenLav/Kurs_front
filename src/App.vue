@@ -1,6 +1,5 @@
 <template>
 <body>
-
     
     <div v-show="OK_TRUE" class="push">
         <div class="push_content">
@@ -127,11 +126,12 @@
             </form>
         </div>
     </div>
+
 </body>
 </template>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="jquery.maskedinput.js" type="text/javascript"></script>
+<script src="jquery.maskedinput.js" type="text/javascript"></script>
 
 <script lang="ts">
 import {
@@ -153,17 +153,6 @@ export default class Home extends Vue {
             OK_TRUE: false,
         };
     }
-
-    response = "ожидание";
-    // ffio = "qwe"
-    poi = "";
-    token = "";
-    FIO = "";
-    FiO = "";
-    ADMIN = false
-    page_TRUE = false
-    OK_TRUE = false
-    info_push = ""
 
     async mounted() {
         this.token = localStorage.token;
@@ -203,6 +192,16 @@ export default class Home extends Vue {
             vm.page_TRUE = false
         }, 2000);
     }
+
+    response = "";
+    poi = "";
+    token = "";
+    FIO = "";
+    FiO = "";
+    ADMIN = false
+    page_TRUE = false
+    OK_TRUE = false
+    info_push = ""
 }
 </script>
 

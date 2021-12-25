@@ -10,6 +10,17 @@
     </div>
 
 
+    <div v-show="OK_TRUE" class="push">
+        <div class="push_content">
+
+            <div id="text_push_id" class="push_content_true">
+                <span>{{info_push}}</span>
+                <i class="bi bi-x-circle" style="padding-left: 10px;" @click="OK_TRUE = !OK_TRUE"></i>
+            </div>
+        </div>
+    </div>
+
+
 
     <div v-show="false" class="add_news">
 
@@ -59,13 +70,13 @@ export default class Home extends Vue {
             OK_TRUE: false,
             add_news_TRUE: false,
             Block_news_TRUE: true,
-            list_problem_TRUE: false
+            list_problem_TRUE: false,
         }
     }
 
     token = "";
 
-    OK_TRUE = "false"
+    OK_TRUE = false
     add_news_TRUE = "false"
     Block_news_TRUE = "true"
     list_problem_TRUE = "false"
@@ -74,6 +85,8 @@ export default class Home extends Vue {
     form = {
         info: ""
     }
+
+    info_push = ""
     
 
     async mounted() {
@@ -81,28 +94,21 @@ export default class Home extends Vue {
 
         const result = await this.$store.dispatch("me_inform");
 
-        const result_news = await this.$store.dispatch("newsList");
-        this.news = result_news.data;
-        console.log(this.news)
-        console.log(result_news.data[1].info)
+       
 
-        if (result.isAdmin !== true) {
-            this.OK_TRUE = "true"
+        if (result.isAdmin === true) {
+            this.OK_TRUE = false
+            this.info_push = "Успешно отправлено"
+            this.list_problem_TRUE = "true"
         }
         else{
-          this.list_problem_TRUE = "true"
+          this.list_problem_TRUE = "false"
         }
     }
 
-    async add_new() {
-        this.add_news_TRUE = "true"        
-    }
+    
 
-    async save_new() {
-      const result = await this.$store.dispatch("create_new", this.form);
-      console.log(result)
-      alert("erty")
-    }
+    
     
 }
 </script>

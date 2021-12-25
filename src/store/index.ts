@@ -8,7 +8,6 @@ const instance = axios.create({
   baseURL: process.env.VUE_APP_SERVER_HOST,
 });
 
-
 instance.defaults.headers.common[
   "Authorization"
 ] = `Bearer ${localStorage.token}`;
@@ -24,6 +23,7 @@ export default new Vuex.Store({
       instance.defaults.headers.common["Authorization"] = `Bearer ${value}`;
     },
   },
+
   actions: {
     async login({ state, commit, rootState }, params) {
       const { data } = await instance.post("/login", params);
@@ -100,5 +100,6 @@ export default new Vuex.Store({
     //   return data;
     // },    
   },
+
   modules: {},
 });

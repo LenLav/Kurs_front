@@ -139,8 +139,14 @@
                         <td class="align-middle">{{ user.male }}</td>
                         <td class="align-middle">{{ user.job }}</td>
                         <td v-show="ADMIN" class="align-middle">{{ user.date_of_receipt }}</td>
-                        <!-- {{ new Date(user.date_of_dismissal).toLocaleString() }} -->
-                        <td v-show="ADMIN" class="align-middle">{{ user.date_of_dismissal }}</td>
+
+                        
+                        <td v-show="ADMIN" v-if="user.date_of_dismissal !== null" class="align-middle">
+                            <span class="badge rounded-pill bg-secondary">{{ new Date(user.date_of_dismissal).toLocaleString().split(",")[0] }}</span>
+                            </td>
+
+                        <td v-show="ADMIN" v-else class="align-middle">{{ user.date_of_dismissal }}</td>
+
                         <td v-show="ADMIN" class="align-middle">{{ user.salary }}</td>
                         <td v-show="ADMIN" class="align-middle">{{ user.marital_status }}</td>
                         <td v-show="ADMIN" class="align-middle">{{ user.amount_of_children }}</td>
@@ -319,6 +325,8 @@ export default class Home extends Vue {
         this.MARITAL_STATUS = result.marital_status
         this.PASPORT = result.pasport
         this.user_isAdmin = result.isAdmin
+
+        console.log(result.date_of_dismissal)
     }
 
     async userDelete(id: any) {
@@ -382,31 +390,9 @@ export default class Home extends Vue {
         }, 4000);
     }
 
-    // ListJob = []
+    
 
-    // qw = [{
-    //         text: 'Директор'
-    //     },
-    //     {
-    //         text: 'Заместитель директора'
-    //     },
-    //     {
-    //         text: 'Ведущий инженер'
-    //     },
-    //     {
-    //         text: 'Инженер'
-    //     },
-    // ]
-
-    // async GetListJob() {
-    //     const c = ["Жен/ЗМ", "Хол/НЗ", "Разв.", "Вдов."]
-    //     console.log(c)
-    //     console.log(this.qw)
-    //     // for (let i = 0; i < c.length; i++) {
-    //     //     this.ListJob[i] = "{ text: 'Директор' }"
-    //     //     }
-
-    // }
+    
 }
 </script>
 
